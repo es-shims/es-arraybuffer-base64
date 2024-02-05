@@ -3,8 +3,8 @@
 var GetIntrinsic = require('get-intrinsic');
 
 var $parseInt = GetIntrinsic('%parseInt%');
-var $SyntaxError = GetIntrinsic('%SyntaxError%');
-var $TypeError = GetIntrinsic('%TypeError%');
+var $SyntaxError = require('es-errors/syntax');
+var $TypeError = require('es-errors/type');
 
 var modulo = require('es-abstract/2023/modulo');
 var substring = require('es-abstract/2023/substring');

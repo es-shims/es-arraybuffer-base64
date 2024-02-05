@@ -1,8 +1,6 @@
 'use strict';
 
-var GetIntrinsic = require('get-intrinsic');
-
-var $TypeError = GetIntrinsic('%TypeError%');
+var $TypeError = require('es-errors/type');
 
 var OrdinaryObjectCreate = require('es-abstract/2023/OrdinaryObjectCreate');
 var Type = require('es-abstract/2023/Type');

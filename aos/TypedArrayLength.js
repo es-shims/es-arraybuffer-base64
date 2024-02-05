@@ -1,8 +1,6 @@
 'use strict';
 
-var GetIntrinsic = require('get-intrinsic');
-
-var $TypeError = GetIntrinsic('%TypeError%');
+var $TypeError = require('es-errors/type');
 
 var floor = require('es-abstract/2023/floor');
 var IsFixedLengthArrayBuffer = require('./IsFixedLengthArrayBuffer');

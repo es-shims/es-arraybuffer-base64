@@ -1,8 +1,6 @@
 'use strict';
 
-var GetIntrinsic = require('get-intrinsic');
-
-var $TypeError = GetIntrinsic('%TypeError%');
+var $TypeError = require('es-errors/type');
 
 var IsDetachedBuffer = require('es-abstract/2023/IsDetachedBuffer');
 var TypedArrayElementSize = require('es-abstract/2023/TypedArrayElementSize');

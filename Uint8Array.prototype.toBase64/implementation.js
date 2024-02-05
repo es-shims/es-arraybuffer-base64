@@ -1,8 +1,6 @@
 'use strict';
 
-var GetIntrinsic = require('get-intrinsic');
-
-var $TypeError = GetIntrinsic('%TypeError%');
+var $TypeError = require('es-errors/type');
 
 var Get = require('es-abstract/2023/Get');
 var ValidateUint8Array = require('../aos/ValidateUint8Array');
