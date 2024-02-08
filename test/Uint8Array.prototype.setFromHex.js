@@ -2,15 +2,16 @@
 
 var defineProperties = require('define-properties');
 var test = require('tape');
+var callBind = require('call-bind');
 
-var index = require('../Uint8Array.fromHexInto');
-var impl = require('../Uint8Array.fromHexInto/implementation');
+var index = require('../Uint8Array.prototype.setFromHex');
+var impl = require('../Uint8Array.prototype.setFromHex/implementation');
 
-var polyfill = require('../Uint8Array.fromHexInto/polyfill')();
+var polyfill = require('../Uint8Array.prototype.setFromHex/polyfill')();
 
 var isEnumerable = Object.prototype.propertyIsEnumerable;
 
-var shimName = 'Uint8Array.fromHexInto';
+var shimName = 'Uint8Array.prototype.setFromHex';
 
 module.exports = {
 	tests: function (t, method) {
@@ -29,13 +30,13 @@ module.exports = {
 			arr[0] = 1;
 
 			st['throws'](
-				function () { return method('F', arr); },
+				function () { return method(arr, 'F'); },
 				SyntaxError,
 				'throws on odd-numbered length hex strings'
 			);
 
 			st['throws'](
-				function () { return method('FG', arr); },
+				function () { return method(arr, 'FG'); },
 				SyntaxError,
 				'throws on invalid hex string characters'
 			);
@@ -43,7 +44,7 @@ module.exports = {
 			var expectedArr = new Uint8Array(256);
 			expectedArr[0] = 1;
 			st.deepEqual(arr, expectedArr, 'initial `arr`');
-			st.deepEqual(method('', arr), { read: 0, written: 0 }, 'empty string makes no changes');
+			st.deepEqual(method(arr, ''), { read: 0, written: 0 }, 'empty string makes no changes');
 			st.deepEqual(arr, expectedArr, '`arr`, no changes');
 
 			var hex = '';
@@ -54,7 +55,7 @@ module.exports = {
 			}
 
 			st.deepEqual(
-				method(hex, arr),
+				method(arr, hex),
 				{ read: 512, written: 256 },
 				'return object is as expected'
 			);
@@ -87,7 +88,7 @@ module.exports = {
 		test(shimName + ': implementation', function (t) {
 			t.equal(impl, polyfill, 'implementation is polyfill itself');
 
-			module.exports.tests(t, impl);
+			module.exports.tests(t, callBind(impl));
 
 			t.end();
 		});
@@ -95,11 +96,11 @@ module.exports = {
 	shimmed: function () {
 		test(shimName + ': shimmed', function (t) {
 			t.test('enumerability', { skip: !defineProperties.supportsDescriptors }, function (et) {
-				et.equal(false, isEnumerable.call(Uint8Array, 'fromHexInto'), shimName + ' is not enumerable');
+				et.equal(false, isEnumerable.call(Uint8Array.prototype, 'setFromHex'), shimName + ' is not enumerable');
 				et.end();
 			});
 
-			module.exports.tests(t, Uint8Array.fromHexInto);
+			module.exports.tests(t, callBind(Uint8Array.prototype.setFromHex));
 
 			t.end();
 		});

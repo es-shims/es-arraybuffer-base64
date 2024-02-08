@@ -3,14 +3,14 @@
 var getPolyfill = require('./polyfill');
 var define = require('define-properties');
 
-module.exports = function shimUint8ArrayFromBase64Into() {
+module.exports = function shimUint8ArraySetFromHex() {
 	var polyfill = getPolyfill();
 
 	if (typeof Uint8Array === 'function') {
 		define(
-			Uint8Array,
-			{ fromBase64Into: polyfill },
-			{ fromBase64Into: function () { return Uint8Array.fromBase64Into !== polyfill; } }
+			Uint8Array.prototype,
+			{ setFromHex: polyfill },
+			{ setFromHex: function () { return Uint8Array.prototype.setFromHex !== polyfill; } }
 		);
 	}
 

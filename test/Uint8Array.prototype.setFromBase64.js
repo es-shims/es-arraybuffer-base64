@@ -2,15 +2,16 @@
 
 var defineProperties = require('define-properties');
 var test = require('tape');
+var callBind = require('call-bind');
 
-var index = require('../Uint8Array.fromBase64Into');
-var impl = require('../Uint8Array.fromBase64Into/implementation');
+var index = require('../Uint8Array.prototype.setFromBase64');
+var impl = require('../Uint8Array.prototype.setFromBase64/implementation');
 
-var polyfill = require('../Uint8Array.fromBase64Into/polyfill')();
+var polyfill = require('../Uint8Array.prototype.setFromBase64/polyfill')();
 
 var isEnumerable = Object.prototype.propertyIsEnumerable;
 
-var shimName = 'Uint8Array.fromBase64Into';
+var shimName = 'Uint8Array.prototype.setFromBase64';
 
 module.exports = {
 	tests: function (t, method) {
@@ -29,14 +30,14 @@ module.exports = {
 			arr[0] = 1;
 
 			st['throws'](
-				function () { return method('F', arr); },
+				function () { return method(arr, 'F'); },
 				SyntaxError,
 				'throws on odd-numbered length base64 strings'
 			);
 
 			var expectedArr = new Uint8Array(12);
 			expectedArr[0] = 1;
-			st.deepEqual(method('', arr), { read: 0, written: 0 }, 'empty string makes no changes');
+			st.deepEqual(method(arr, ''), { read: 0, written: 0 }, 'empty string makes no changes');
 			st.deepEqual(arr, expectedArr, '`arr`, no changes');
 
 			var helloWorld = 'aGVsbG8gd29ybGQ=';
@@ -52,7 +53,7 @@ module.exports = {
 			var expected = new Uint8Array([104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100, 0]);
 
 			st.deepEqual(
-				method(helloWorld, arr),
+				method(arr, helloWorld),
 				{ read: 16, written: 11 },
 				'return object is as expected'
 			);
@@ -63,7 +64,7 @@ module.exports = {
 			);
 
 			st.deepEqual(
-				method(sentenceHelloWorld, arr),
+				method(arr, sentenceHelloWorld),
 				{ read: 16, written: 11 },
 				'return object is as expected'
 			);
@@ -74,7 +75,7 @@ module.exports = {
 			);
 
 			st.deepEqual(
-				method('+/+/', arr),
+				method(arr, '+/+/'),
 				{ read: 4, written: 3 },
 				'return object is as expected'
 			);
@@ -85,7 +86,7 @@ module.exports = {
 			);
 
 			st.deepEqual(
-				method('+/+/', arr, { alphabet: 'base64' }),
+				method(arr, '+/+/', { alphabet: 'base64' }),
 				{ read: 4, written: 3 },
 				'return object is as expected'
 			);
@@ -96,7 +97,7 @@ module.exports = {
 			);
 
 			st.deepEqual(
-				method('-_-_', arr, { alphabet: 'base64url' }),
+				method(arr, '-_-_', { alphabet: 'base64url' }),
 				{ read: 4, written: 3 },
 				'return object is as expected'
 			);
@@ -107,7 +108,7 @@ module.exports = {
 			);
 
 			st['throws'](
-				function () { method('-_-_', arr, { alphabet: 'base64' }); },
+				function () { method(arr, '-_-_', { alphabet: 'base64' }); },
 				SyntaxError,
 				'base64url string with base64 alphabet throws'
 			);
@@ -135,7 +136,7 @@ module.exports = {
 		test(shimName + ': implementation', function (t) {
 			t.equal(impl, polyfill, 'implementation is polyfill itself');
 
-			module.exports.tests(t, impl);
+			module.exports.tests(t, callBind(impl));
 
 			t.end();
 		});
@@ -143,11 +144,11 @@ module.exports = {
 	shimmed: function () {
 		test(shimName + ': shimmed', function (t) {
 			t.test('enumerability', { skip: !defineProperties.supportsDescriptors }, function (et) {
-				et.equal(false, isEnumerable.call(Uint8Array, 'fromBase64Into'), shimName + ' is not enumerable');
+				et.equal(false, isEnumerable.call(Uint8Array.prototype, 'setFromBase64'), shimName + ' is not enumerable');
 				et.end();
 			});
 
-			module.exports.tests(t, Uint8Array.fromBase64Into);
+			module.exports.tests(t, callBind(Uint8Array.prototype.setFromBase64));
 
 			t.end();
 		});
