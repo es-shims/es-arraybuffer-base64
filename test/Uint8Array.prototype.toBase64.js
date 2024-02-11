@@ -16,7 +16,7 @@ var shimName = 'Uint8Array.prototype.' + methodName;
 
 module.exports = {
 	tests: function (t, method) {
-		t.test({ skip: typeof Uint8Array === 'function' }, 'Uint8Arrays not supported', function (st) {
+		t.test('Uint8Arrays not supported', { skip: typeof Uint8Array === 'function' }, function (st) {
 			st['throws'](
 				function () { return method(); },
 				SyntaxError,
@@ -26,7 +26,7 @@ module.exports = {
 			st.end();
 		});
 
-		t.test({ skip: typeof Uint8Array !== 'function' }, 'Uint8Arrays supported', function (st) {
+		t.test('Uint8Arrays supported', { skip: typeof Uint8Array !== 'function' }, function (st) {
 			st.deepEqual(method(new Uint8Array([])), '', 'empty array produces empty string');
 
 			var array = new Uint8Array([251, 255, 191]);

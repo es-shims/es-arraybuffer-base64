@@ -15,7 +15,7 @@ var shimName = 'Uint8Array.prototype.setFromHex';
 
 module.exports = {
 	tests: function (t, method) {
-		t.test({ skip: typeof Uint8Array === 'function' }, 'Uint8Arrays not supported', function (st) {
+		t.test('Uint8Arrays not supported', { skip: typeof Uint8Array === 'function' }, function (st) {
 			st['throws'](
 				function () { return method(''); },
 				SyntaxError,
@@ -25,7 +25,7 @@ module.exports = {
 			st.end();
 		});
 
-		t.test({ skip: typeof Uint8Array !== 'function' }, 'Uint8Arrays supported', function (st) {
+		t.test('Uint8Arrays supported', { skip: typeof Uint8Array !== 'function' }, function (st) {
 			var arr = new Uint8Array(256);
 			arr[0] = 1;
 
@@ -89,7 +89,6 @@ module.exports = {
 			t.equal(impl, polyfill, 'implementation is polyfill itself');
 
 			module.exports.tests(t, callBind(impl));
-
 			t.end();
 		});
 	},
