@@ -4,14 +4,16 @@ var IsTypedArrayOutOfBounds = require('./IsTypedArrayOutOfBounds');
 var TypedArrayElementSize = require('es-abstract/2023/TypedArrayElementSize');
 var TypedArrayLength = require('./TypedArrayLength');
 
-// var assertRecord = require('es-abstract/helpers/assertRecord');
+// var isTypedArrayWithBufferWitnessRecord = require('es-abstract/helpers/records/typed-array-with-buffer-witness-record');
 
 var typedArrayByteLength = require('typed-array-byte-length');
 
 // https://tc39.es/ecma262/#sec-typedarraybytelength
 
 module.exports = function TypedArrayByteLength(taRecord) {
-	// assertRecord(Type, 'TypedArray With Buffer Witness Record', 'taRecord', taRecord);
+	// if (!isTypedArrayWithBufferWitnessRecord(taRecord)) {
+	// 	throw new $TypeError('Assertion failed: `taRecord` is not a TypedArray With Buffer Witness Record');
+	// }
 
 	if (IsTypedArrayOutOfBounds(taRecord)) {
 		return 0; // step 1

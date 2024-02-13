@@ -4,9 +4,8 @@ var $TypeError = require('es-errors/type');
 
 var IsDetachedBuffer = require('es-abstract/2023/IsDetachedBuffer');
 var TypedArrayElementSize = require('es-abstract/2023/TypedArrayElementSize');
-// var Type = require('es-abstract/2023/Type');
 
-// var assertRecord = require('es-abstract/helpers/assertRecord');
+// var isTypedArrayWithBufferWitnessRecord = require('es-abstract/helpers/records/typed-array-with-buffer-witness-record');
 
 var typedArrayBuffer = require('typed-array-buffer');
 var typedArrayByteOffset = require('typed-array-byte-offset');
@@ -15,7 +14,9 @@ var typedArrayLength = require('typed-array-length');
 // https://tc39.es/ecma262/#sec-istypedarrayoutofbounds
 
 module.exports = function IsTypedArrayOutOfBounds(taRecord) {
-	// assertRecord(Type, 'TypedArray With Buffer Witness Record', 'taRecord', taRecord);
+	// if (!isTypedArrayWithBufferWitnessRecord(taRecord)) {
+	// 	throw new $TypeError('Assertion failed: `taRecord` is not a TypedArray With Buffer Witness Record');
+	// }
 
 	var O = taRecord['[[Object]]']; // step 1
 
