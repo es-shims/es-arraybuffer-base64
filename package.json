@@ -85,7 +85,6 @@
 		"typed-array-buffer": "^1.0.1",
 		"typed-array-byte-offset": "^1.0.0",
 		"typed-array-length": "^1.0.4",
-		"typedarray.prototype.slice": "^1.0.2",
 		"which-typed-array": "^1.1.14"
 	},
 	"engines": {
