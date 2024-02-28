@@ -23,7 +23,7 @@ module.exports = function setFromHex(string) {
 	ValidateUint8Array(into); // step 2
 
 	if (typeof string !== 'string') {
-		throw new $TypeError('`string` is not a string: ' + string); // step 3
+		throw new $TypeError('`string` is not a string: ' + typeof string); // step 3
 	}
 
 	var taRecord = MakeTypedArrayWithBufferWitnessRecord(into, 'SEQ-CST'); // step 4
