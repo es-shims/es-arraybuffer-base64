@@ -16,7 +16,7 @@ module.exports = function fromBase64(string) {
 	}
 
 	if (typeof string !== 'string') {
-		throw new $TypeError('`string` is not a string: ' + string); // step 1
+		throw new $TypeError('`string` is not a string: ' + typeof string); // step 1
 	}
 
 	var opts = GetOptionsObject(arguments.length > 1 ? arguments[1] : void undefined); // step 2

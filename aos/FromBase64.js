@@ -108,7 +108,7 @@ module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
 				throw new $SyntaxError('unexpected character after padding'); // step 10.e.iv.1
 			}
 
-			var throwOnExtraBits = lastChunkHandling === 'string'; // step 10.e.v - vi
+			var throwOnExtraBits = lastChunkHandling === 'strict'; // step 10.e.v - vi
 
 			bytes = safeArrayConcat(bytes, DecodeBase64Chunk(chunk, throwOnExtraBits)); // step 10.e.vii
 
