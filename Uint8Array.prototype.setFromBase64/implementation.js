@@ -29,7 +29,7 @@ module.exports = function setFromBase64(string) {
 	ValidateUint8Array(into); // step 2
 
 	if (typeof string !== 'string') {
-		throw new $TypeError('`string` is not a string: ' + string); // step 3
+		throw new $TypeError('`string` is not a string: ' + typeof string); // step 3
 	}
 
 	var opts = GetOptionsObject(arguments.length > 1 ? arguments[1] : void undefined); // step 4
@@ -41,7 +41,7 @@ module.exports = function setFromBase64(string) {
 	}
 
 	if (typeof alphabet !== 'string') {
-		throw new $TypeError('`alphabet` is not a string: ' + alphabet); // step 7
+		throw new $TypeError('`alphabet` is not a string: ' + typeof alphabet); // step 7
 	}
 
 	if (alphabet !== 'base64' && alphabet !== 'base64url') {

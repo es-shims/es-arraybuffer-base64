@@ -18,6 +18,7 @@
 			"capIsNewExceptions": [
 				"FromBase64",
 				"FromHex",
+				"DetachArrayBuffer",
 				"Get",
 				"GetIntrinsic",
 				"GetOptionsObject",
