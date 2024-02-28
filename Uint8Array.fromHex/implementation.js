@@ -14,7 +14,7 @@ module.exports = function fromHex(string) {
 	}
 
 	if (typeof string !== 'string') {
-		throw new $TypeError('`string` is not a string: ' + string); // step 1
+		throw new $TypeError('`string` is not a string: ' + typeof string); // step 1
 	}
 
 	var result = FromHex(string); // step 2

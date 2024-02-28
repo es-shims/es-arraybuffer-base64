@@ -2,6 +2,8 @@
 
 var defineProperties = require('define-properties');
 var test = require('tape');
+var forEach = require('for-each');
+var getProto = require('es-abstract/helpers/getProto');
 
 var index = require('../Uint8Array.fromHex');
 var impl = require('../Uint8Array.fromHex/implementation');
@@ -51,6 +53,61 @@ module.exports = {
 				new Uint8Array(expected),
 				'hex (' + hex + ') produces expected bytes (' + expected.join(', ') + ')'
 			);
+
+			var illegal = [
+				'a.a',
+				'aa^',
+				'a a',
+				'a\ta',
+				'a\x0Aa',
+				'a\x0Ca',
+				'a\x0Da',
+				'a\u00A0a', // nbsp
+				'a\u2009a', // thin space
+				'a\u2028a' // line separator
+			];
+			forEach(illegal, function (value) {
+				st['throws'](
+					function () { method(value); },
+					SyntaxError
+				);
+			});
+
+			var cases = [
+				['', []],
+				['66', [102]],
+				['666f', [102, 111]],
+				['666F', [102, 111]],
+				['666f6f', [102, 111, 111]],
+				['666F6f', [102, 111, 111]],
+				['666f6f62', [102, 111, 111, 98]],
+				['666f6f6261', [102, 111, 111, 98, 97]],
+				['666f6f626172', [102, 111, 111, 98, 97, 114]]
+			];
+			forEach(cases, function (pair) {
+				var arr = method(pair[0]);
+				st.equal(getProto(arr), Uint8Array.prototype, 'decoding ' + pair[0]);
+				st.deepEqual(arr, new Uint8Array(pair[1]), 'decoding ' + pair[0]);
+			});
+
+			st.test('test262: test/built-ins/Uint8Array/fromHex/string-coercion.js', function (s2t) {
+				var throwyToString = {};
+				var results = s2t.intercept(
+					throwyToString,
+					'toString',
+					{
+						value: function () { throw new EvalError('toString called'); }
+					}
+				);
+
+				s2t['throws'](
+					function () { method(throwyToString); },
+					TypeError
+				);
+				s2t.deepEqual(results(), []);
+
+				s2t.end();
+			});
 
 			st.end();
 		});
