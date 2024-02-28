@@ -3,8 +3,9 @@
 var $TypeError = require('es-errors/type');
 
 var Get = require('es-abstract/2023/Get');
-var ValidateUint8Array = require('../aos/ValidateUint8Array');
 var GetOptionsObject = require('../aos/GetOptionsObject');
+var GetUint8ArrayBytes = require('../aos/GetUint8ArrayBytes');
+var ValidateUint8Array = require('../aos/ValidateUint8Array');
 
 var alphabetFromIdentifier = require('../aos/helpers/alphabetFromIdentifier');
 
@@ -27,12 +28,15 @@ module.exports = function toBase64() {
 	}
 
 	if (typeof alphabet !== 'string') {
-		throw new $TypeError('`alphabet` is not a string: ' + alphabet); // step 6
+		throw new $TypeError('`alphabet` is not a string: ' + typeof alphabet); // step 6
 	}
 
 	if (alphabet !== 'base64' && alphabet !== 'base64url') {
 		throw new $TypeError('Invalid alphabet'); // step 7
 	}
+
+	// eslint-disable-next-line no-unused-vars
+	var toEncode = GetUint8ArrayBytes(O); // step 8
 
 	// if (alphabet === 'base64') { // step 8
 	// 		a. Let outAscii be the sequence of code points which results from encoding toEncode according to the base64 encoding specified in section 4 of RFC 4648.
