@@ -1,7 +1,7 @@
 'use strict';
 
 var defineProperties = require('define-properties');
-var forEach = require('for-each');
+var forEach = require('es-abstract/helpers/forEach');
 var getProto = require('es-abstract/helpers/getProto');
 var inspect = require('object-inspect');
 var test = require('tape');

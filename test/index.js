@@ -1,7 +1,7 @@
 'use strict';
 
 var test = require('tape');
-var forEach = require('for-each');
+var forEach = require('es-abstract/helpers/forEach');
 
 var shims = require('../');
 
