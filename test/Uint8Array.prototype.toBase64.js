@@ -164,6 +164,13 @@ module.exports = {
 			});
 
 			st.test('test262: test/built-ins/Uint8Array/prototype/toBase64/option-coercion.js', function (s2t) {
+				s2t['throws'](
+					function () {
+						method(new Uint8Array(2), { alphabet: Object('base64') });
+					},
+					TypeError
+				);
+
 				var throwyToString = {};
 				var results = s2t.intercept(throwyToString, 'toString', {
 					value: function () {

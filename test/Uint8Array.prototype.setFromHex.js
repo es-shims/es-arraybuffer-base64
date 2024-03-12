@@ -121,8 +121,7 @@ module.exports = {
 				var allFF = [255, 255, 255, 255, 255, 255, 255, 255];
 				var target = new Uint8Array(allFF);
 				var result = method(target, pair[0]);
-				st.equal(result.read, pair[0].length);
-				st.equal(result.written, pair[1].length);
+				st.deepEqual(result, { read: pair[0].length, written: pair[1].length });
 
 				var expectedResult = new Uint8Array(pair[1].concat(allFF.slice(pair[1].length)));
 				st.deepEqual(target, expectedResult, 'decoding ' + pair[0]);
@@ -153,8 +152,7 @@ module.exports = {
 				var subarray = base.subarray(2, 5);
 
 				var result = method(subarray, 'aabbcc');
-				s2t.equal(result.read, 6);
-				s2t.equal(result.written, 3);
+				s2t.deepEqual(result, { read: 6, written: 3 });
 				s2t.deepEqual(subarray, new Uint8Array([170, 187, 204]));
 				s2t.deepEqual(base, new Uint8Array([255, 255, 170, 187, 204, 255, 255]));
 
@@ -165,22 +163,19 @@ module.exports = {
 				// buffer too small
 				var target = new Uint8Array([255, 255]);
 				var result = method(target, 'aabbcc');
-				s2t.equal(result.read, 4);
-				s2t.equal(result.written, 2);
+				s2t.deepEqual(result, { read: 4, written: 2 });
 				s2t.deepEqual(target, new Uint8Array([170, 187]));
 
 				// buffer exact
 				var target2 = new Uint8Array([255, 255, 255]);
 				var result2 = method(target2, 'aabbcc');
-				s2t.equal(result2.read, 6);
-				s2t.equal(result2.written, 3);
+				s2t.deepEqual(result2, { read: 6, written: 3 });
 				s2t.deepEqual(target2, new Uint8Array([170, 187, 204]));
 
 				// buffer too large
 				var target3 = new Uint8Array([255, 255, 255, 255]);
 				var result3 = method(target3, 'aabbcc');
-				s2t.equal(result3.read, 6);
-				s2t.equal(result3.written, 3);
+				s2t.deepEqual(result3, { read: 6, written: 3 });
 				s2t.deepEqual(target3, new Uint8Array([170, 187, 204, 255]));
 
 				s2t.end();

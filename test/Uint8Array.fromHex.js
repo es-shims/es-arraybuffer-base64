@@ -64,7 +64,8 @@ module.exports = {
 				'a\x0Da',
 				'a\u00A0a', // nbsp
 				'a\u2009a', // thin space
-				'a\u2028a' // line separator
+				'a\u2028a', // line separator
+				'a' // odd length input
 			];
 			forEach(illegal, function (value) {
 				st['throws'](
@@ -87,6 +88,8 @@ module.exports = {
 			forEach(cases, function (pair) {
 				var arr = method(pair[0]);
 				st.equal(getProto(arr), Uint8Array.prototype, 'decoding ' + pair[0]);
+				st.equal(arr.length, pair[1].length, 'decoding ' + pair[0]);
+				st.equal(arr.buffer.byteLength, pair[1].length, 'decoding ' + pair[0]);
 				st.deepEqual(arr, new Uint8Array(pair[1]), 'decoding ' + pair[0]);
 			});
 
@@ -95,9 +98,7 @@ module.exports = {
 				var results = s2t.intercept(
 					throwyToString,
 					'toString',
-					{
-						value: function () { throw new EvalError('toString called'); }
-					}
+					{ value: function () { throw new EvalError('toString called'); } }
 				);
 
 				s2t['throws'](

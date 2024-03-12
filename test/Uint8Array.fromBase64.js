@@ -171,6 +171,39 @@ module.exports = {
 					SyntaxError
 				);
 
+				// partial padding
+				s2t['throws'](
+					function () { method('ZXhhZg='); },
+					SyntaxError
+				);
+				s2t['throws'](
+					function () { method('ZXhhZg=', { lastChunkHandling: 'loose' }); },
+					SyntaxError
+				);
+				s2t.deepEqual(method('ZXhhZg=', { lastChunkHandling: 'stop-before-partial' }), new Uint8Array([101, 120, 97]));
+				s2t['throws'](
+					function () { method('ZXhhZg=', { lastChunkHandling: 'strict' }); },
+					SyntaxError
+				);
+
+				// excess padding
+				s2t['throws'](
+					function () { method('ZXhhZg==='); },
+					SyntaxError
+				);
+				s2t['throws'](
+					function () { method('ZXhhZg===', { lastChunkHandling: 'loose' }); },
+					SyntaxError
+				);
+				s2t['throws'](
+					function () { method('ZXhhZg===', { lastChunkHandling: 'stop-before-partial' }); },
+					SyntaxError
+				);
+				s2t['throws'](
+					function () { method('ZXhhZg===', { lastChunkHandling: 'strict' }); },
+					SyntaxError
+				);
+
 				s2t.end();
 			});
 
@@ -193,6 +226,16 @@ module.exports = {
 					TypeError
 				);
 				s2t.deepEqual(results(), []);
+
+				s2t['throws'](
+					function () { method('Zg==', { alphabet: Object('base64') }); },
+					TypeError
+				);
+
+				s2t['throws'](
+					function () { method('Zg==', { lastChunkHandling: Object('loose') }); },
+					TypeError
+				);
 
 				s2t.test('getters', { skip: !defineProperties.supportsDescriptors }, function (s3t) {
 					var base64UrlOptions = {};
@@ -246,6 +289,7 @@ module.exports = {
 				forEach(standardBase64Vectors, function (pair) {
 					var arr = method(pair[0]);
 					s2t.equal(getProto(arr), Uint8Array.prototype, 'decoding ' + pair[0]);
+					s2t.equal(arr.buffer.byteLength, pair[1].length, 'decoding ' + pair[0]);
 					s2t.deepEqual(arr, new Uint8Array(pair[1]), 'decoding ' + pair[0]);
 				});
 
@@ -303,6 +347,9 @@ module.exports = {
 				];
 				forEach(whitespaceKinds, function (pair) {
 					var arr = method(pair[0]);
+
+					s2t.equal(arr.length, 1);
+					s2t.equal(arr.buffer.byteLength, 1);
 					s2t.deepEqual(arr, new Uint8Array([102]), 'ascii whitespace: ' + pair[1]);
 				});
 

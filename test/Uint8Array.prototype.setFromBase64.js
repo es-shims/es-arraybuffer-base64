@@ -122,14 +122,12 @@ module.exports = {
 			st.test('test262: test/built-ins/Uint8Array/prototype/setFromBase64/alphabet.js', function (s2t) {
 				var target1 = new Uint8Array([255, 255, 255, 255]);
 				var result1 = method(target1, 'x+/y');
-				s2t.equal(result1.read, 4);
-				s2t.equal(result1.written, 3);
+				s2t.deepEqual(result1, { read: 4, written: 3 });
 				s2t.deepEqual(target1, new Uint8Array([199, 239, 242, 255]));
 
 				var target2 = new Uint8Array([255, 255, 255, 255]);
 				var result2 = method(target2, 'x+/y', { alphabet: 'base64' });
-				s2t.equal(result2.read, 4);
-				s2t.equal(result2.written, 3);
+				s2t.deepEqual(result2, { read: 4, written: 3 });
 				s2t.deepEqual(target2, new Uint8Array([199, 239, 242, 255]));
 
 				s2t['throws'](
@@ -142,8 +140,7 @@ module.exports = {
 
 				var target3 = new Uint8Array([255, 255, 255, 255]);
 				var result3 = method(target3, 'x-_y', { alphabet: 'base64url' });
-				s2t.equal(result3.read, 4);
-				s2t.equal(result3.written, 3);
+				s2t.deepEqual(result3, { read: 4, written: 3 });
 				s2t.deepEqual(target3, new Uint8Array([199, 239, 242, 255]));
 
 				s2t['throws'](
@@ -208,45 +205,38 @@ module.exports = {
 				// padding
 				var target1 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result1 = method(target1, 'ZXhhZg==');
-				s2t.equal(result1.read, 8);
-				s2t.equal(result1.written, 4);
+				s2t.deepEqual(result1, { read: 8, written: 4 });
 				s2t.deepEqual(target1, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				var target2 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result2 = method(target2, 'ZXhhZg==', { lastChunkHandling: 'loose' });
-				s2t.equal(result2.read, 8);
-				s2t.equal(result2.written, 4);
+				s2t.deepEqual(result2, { read: 8, written: 4 });
 				s2t.deepEqual(target2, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				var target3 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result3 = method(target3, 'ZXhhZg==', { lastChunkHandling: 'stop-before-partial' });
-				s2t.equal(result3.read, 8);
-				s2t.equal(result3.written, 4);
+				s2t.deepEqual(result3, { read: 8, written: 4 });
 				s2t.deepEqual(target3, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				var target4 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result4 = method(target4, 'ZXhhZg==', { lastChunkHandling: 'strict' });
-				s2t.equal(result4.read, 8);
-				s2t.equal(result4.written, 4);
+				s2t.deepEqual(result4, { read: 8, written: 4 });
 				s2t.deepEqual(target4, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				// no padding
 				var target5 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result5 = method(target5, 'ZXhhZg');
-				s2t.equal(result5.read, 6);
-				s2t.equal(result5.written, 4);
+				s2t.deepEqual(result5, { read: 6, written: 4 });
 				s2t.deepEqual(target5, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				var target6 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result6 = method(target6, 'ZXhhZg', { lastChunkHandling: 'loose' });
-				s2t.equal(result6.read, 6);
-				s2t.equal(result6.written, 4);
+				s2t.deepEqual(result6, { read: 6, written: 4 });
 				s2t.deepEqual(target6, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				var target7 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result7 = method(target7, 'ZXhhZg', { lastChunkHandling: 'stop-before-partial' });
-				s2t.equal(result7.read, 4);
-				s2t.equal(result7.written, 3);
+				s2t.deepEqual(result7, { read: 4, written: 3 });
 				s2t.deepEqual(target7, new Uint8Array([101, 120, 97, 255, 255, 255]));
 
 				s2t['throws'](
@@ -260,20 +250,17 @@ module.exports = {
 				// non-zero padding bits
 				var target8 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result8 = method(target8, 'ZXhhZh==');
-				s2t.equal(result8.read, 8);
-				s2t.equal(result8.written, 4);
+				s2t.deepEqual(result8, { read: 8, written: 4 });
 				s2t.deepEqual(target8, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				var target9 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result9 = method(target9, 'ZXhhZh==', { lastChunkHandling: 'loose' });
-				s2t.equal(result9.read, 8);
-				s2t.equal(result9.written, 4);
+				s2t.deepEqual(result9, { read: 8, written: 4 });
 				s2t.deepEqual(target9, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				var target10 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result10 = method(target10, 'ZXhhZh==', { lastChunkHandling: 'stop-before-partial' });
-				s2t.equal(result10.read, 8);
-				s2t.equal(result10.written, 4);
+				s2t.deepEqual(result10, { read: 8, written: 4 });
 				s2t.deepEqual(target10, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				s2t['throws'](
@@ -287,26 +274,86 @@ module.exports = {
 				// non-zero padding bits, no padding
 				var target11 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result11 = method(target11, 'ZXhhZh');
-				s2t.equal(result11.read, 6);
-				s2t.equal(result11.written, 4);
+				s2t.deepEqual(result11, { read: 6, written: 4 });
 				s2t.deepEqual(target11, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				var target12 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result12 = method(target12, 'ZXhhZh', { lastChunkHandling: 'loose' });
-				s2t.equal(result12.read, 6);
-				s2t.equal(result12.written, 4);
+				s2t.deepEqual(result12, { read: 6, written: 4 });
 				s2t.deepEqual(target12, new Uint8Array([101, 120, 97, 102, 255, 255]));
 
 				var target13 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result13 = method(target13, 'ZXhhZh', { lastChunkHandling: 'stop-before-partial' });
-				s2t.equal(result13.read, 4);
-				s2t.equal(result13.written, 3);
+				s2t.deepEqual(result13, { read: 4, written: 3 });
 				s2t.deepEqual(target13, new Uint8Array([101, 120, 97, 255, 255, 255]));
 
 				s2t['throws'](
 					function () {
 						var target = new Uint8Array([255, 255, 255, 255, 255, 255]);
 						method(target, 'ZXhhZh', { lastChunkHandling: 'strict' });
+					},
+					SyntaxError
+				);
+
+				// partial padding
+				s2t['throws'](
+					function () {
+						var target = new Uint8Array([255, 255, 255, 255, 255, 255]);
+						method(target, 'ZXhhZg=');
+					},
+					SyntaxError
+				);
+
+				s2t['throws'](
+					function () {
+						var target = new Uint8Array([255, 255, 255, 255, 255, 255]);
+						method(target, 'ZXhhZg=', { lastChunkHandling: 'loose' });
+					},
+					SyntaxError
+				);
+
+				var target14 = new Uint8Array([255, 255, 255, 255, 255, 255]);
+				var result = method(target14, 'ZXhhZg=', { lastChunkHandling: 'stop-before-partial' });
+				s2t.deepEqual(result, { read: 4, written: 3 });
+				s2t.deepEqual(target14, new Uint8Array([101, 120, 97, 255, 255, 255]));
+
+				s2t['throws'](
+					function () {
+						var target = new Uint8Array([255, 255, 255, 255, 255, 255]);
+						method(target, 'ZXhhZg=', { lastChunkHandling: 'strict' });
+					},
+					SyntaxError
+				);
+
+				// excess padding
+				s2t['throws'](
+					function () {
+						var target = new Uint8Array([255, 255, 255, 255, 255, 255]);
+						method(target, 'ZXhhZg===');
+					},
+					SyntaxError
+				);
+
+				s2t['throws'](
+					function () {
+						var target = new Uint8Array([255, 255, 255, 255, 255, 255]);
+						method(target, 'ZXhhZg===', { lastChunkHandling: 'loose' });
+					},
+					SyntaxError
+				);
+
+				s2t['throws'](
+					function () {
+						var target = new Uint8Array([255, 255, 255, 255, 255, 255]);
+						method(target, 'ZXhhZg===', { lastChunkHandling: 'stop-before-partial' });
+					},
+					SyntaxError
+				);
+
+				s2t['throws'](
+					function () {
+						var target = new Uint8Array([255, 255, 255, 255, 255, 255]);
+						method(target, 'ZXhhZg===', { lastChunkHandling: 'strict' });
 					},
 					SyntaxError
 				);
@@ -328,11 +375,10 @@ module.exports = {
 					SyntaxError
 				);
 
-				var target14 = new Uint8Array([255, 255, 255, 255, 255, 255]);
-				var result14 = method(target14, 'ZXhhZg=', { lastChunkHandling: 'stop-before-partial' });
-				s2t.equal(result14.read, 4);
-				s2t.equal(result14.written, 3);
-				s2t.deepEqual(target14, new Uint8Array([101, 120, 97, 255, 255, 255]));
+				var target15 = new Uint8Array([255, 255, 255, 255, 255, 255]);
+				var result15 = method(target15, 'ZXhhZg=', { lastChunkHandling: 'stop-before-partial' });
+				s2t.deepEqual(result15, { read: 4, written: 3 });
+				s2t.deepEqual(target15, new Uint8Array([101, 120, 97, 255, 255, 255]));
 
 				s2t['throws'](
 					function () {
@@ -346,6 +392,22 @@ module.exports = {
 			});
 
 			st.test('test262: test/built-ins/Uint8Array/prototype/setFromBase64/option-coercion.js', function (s2t) {
+				s2t['throws'](
+					function () {
+						var target = new Uint8Array([255, 255, 255]);
+						method(target, 'Zg==', { alphabet: Object('base64') });
+					},
+					TypeError
+				);
+
+				s2t['throws'](
+					function () {
+						var target = new Uint8Array([255, 255, 255]);
+						method(target, 'Zg==', { lastChunkHandling: Object('strict') });
+					},
+					TypeError
+				);
+
 				var throwyToString = {};
 				var results = s2t.intercept(throwyToString, 'toString', {
 					value: function () {
@@ -380,8 +442,7 @@ module.exports = {
 				});
 				var target = new Uint8Array([255, 255, 255, 255]);
 				var result = method(target, 'x-_y', base64UrlOptions);
-				s2t.equal(result.read, 4);
-				s2t.equal(result.written, 3);
+				s2t.deepEqual(result, { read: 4, written: 3 });
 				s2t.deepEqual(target, new Uint8Array([199, 239, 242, 255]));
 				s2t.equal(alphabetAccesses, 1);
 
@@ -395,8 +456,7 @@ module.exports = {
 				});
 				var target2 = new Uint8Array([255, 255, 255, 255]);
 				var result2 = method(target2, 'Zg==', strictOptions);
-				s2t.equal(result2.read, 4);
-				s2t.equal(result2.written, 1);
+				s2t.deepEqual(result2, { read: 4, written: 1 });
 				s2t.deepEqual(target2, new Uint8Array([102, 255, 255, 255]));
 				s2t.equal(lastChunkHandlingAccesses, 1);
 
@@ -455,8 +515,7 @@ module.exports = {
 				var subarray = base.subarray(2, 5);
 
 				var result = method(subarray, 'Zm9vYmFy');
-				s2t.equal(result.read, 4);
-				s2t.equal(result.written, 3);
+				s2t.deepEqual(result, { read: 4, written: 3 });
 				s2t.deepEqual(subarray, new Uint8Array([102, 111, 111]));
 				s2t.deepEqual(base, new Uint8Array([255, 255, 102, 111, 111, 255, 255]));
 
@@ -467,57 +526,49 @@ module.exports = {
 				// buffer too small
 				var target1 = new Uint8Array([255, 255, 255, 255, 255]);
 				var result1 = method(target1, 'Zm9vYmFy');
-				s2t.equal(result1.read, 4);
-				s2t.equal(result1.written, 3);
+				s2t.deepEqual(result1, { read: 4, written: 3 });
 				s2t.deepEqual(target1, new Uint8Array([102, 111, 111, 255, 255]));
 
 				// buffer too small, padded
 				var target2 = new Uint8Array([255, 255, 255, 255]);
 				var result2 = method(target2, 'Zm9vYmE=');
-				s2t.equal(result2.read, 4);
-				s2t.equal(result2.written, 3);
+				s2t.deepEqual(result2, { read: 4, written: 3 });
 				s2t.deepEqual(target2, new Uint8Array([102, 111, 111, 255]));
 
 				// buffer exact
 				var target3 = new Uint8Array([255, 255, 255, 255, 255, 255]);
 				var result3 = method(target3, 'Zm9vYmFy');
-				s2t.equal(result3.read, 8);
-				s2t.equal(result3.written, 6);
+				s2t.deepEqual(result3, { read: 8, written: 6 });
 				s2t.deepEqual(target3, new Uint8Array([102, 111, 111, 98, 97, 114]));
 
 				// buffer exact, padded
 				var target4 = new Uint8Array([255, 255, 255, 255, 255]);
 				var result4 = method(target4, 'Zm9vYmE=');
-				s2t.equal(result4.read, 8);
-				s2t.equal(result4.written, 5);
+				s2t.deepEqual(result4, { read: 8, written: 5 });
 				s2t.deepEqual(target4, new Uint8Array([102, 111, 111, 98, 97]));
 
 				// buffer exact, not padded
 				var target5 = new Uint8Array([255, 255, 255, 255, 255]);
 				var result5 = method(target5, 'Zm9vYmE');
-				s2t.equal(result5.read, 7);
-				s2t.equal(result5.written, 5);
+				s2t.deepEqual(result5, { read: 7, written: 5 });
 				s2t.deepEqual(target5, new Uint8Array([102, 111, 111, 98, 97]));
 
 				// buffer exact, padded, stop-before-partial
 				var target6 = new Uint8Array([255, 255, 255, 255, 255]);
 				var result6 = method(target6, 'Zm9vYmE=', { lastChunkHandling: 'stop-before-partial' });
-				s2t.equal(result6.read, 8);
-				s2t.equal(result6.written, 5);
+				s2t.deepEqual(result6, { read: 8, written: 5 });
 				s2t.deepEqual(target6, new Uint8Array([102, 111, 111, 98, 97]));
 
 				// buffer exact, not padded, stop-before-partial
 				var target7 = new Uint8Array([255, 255, 255, 255, 255]);
 				var result7 = method(target7, 'Zm9vYmE', { lastChunkHandling: 'stop-before-partial' });
-				s2t.equal(result7.read, 4);
-				s2t.equal(result7.written, 3);
+				s2t.deepEqual(result7, { read: 4, written: 3 });
 				s2t.deepEqual(target7, new Uint8Array([102, 111, 111, 255, 255]));
 
 				// buffer too large
 				var target8 = new Uint8Array([255, 255, 255, 255, 255, 255, 255]);
 				var result8 = method(target8, 'Zm9vYmFy');
-				s2t.equal(result8.read, 8);
-				s2t.equal(result8.written, 6);
+				s2t.deepEqual(result8, { read: 8, written: 6 });
 				s2t.deepEqual(target8, new Uint8Array([102, 111, 111, 98, 97, 114, 255]));
 
 				s2t.end();
@@ -527,8 +578,8 @@ module.exports = {
 				'Zm.9v',
 				'Zm9v^',
 				'Zg==&',
-				'Z−==', // U+2212 'Minus Sign'
-				'Z＋==', // U+FF0B 'Fullwidth Plus Sign'
+				'Z\u2212==', // U+2212 'Minus Sign'
+				'Z\uFF0B==', // U+FF0B 'Fullwidth Plus Sign'
 				'Zg\u00A0==', // nbsp
 				'Zg\u2009==', // thin space
 				'Zg\u2028==' // line separator
@@ -556,8 +607,7 @@ module.exports = {
 				var allFF = [255, 255, 255, 255, 255, 255, 255, 255];
 				var target = new Uint8Array(allFF);
 				var result = method(target, pair[0]);
-				st.equal(result.read, pair[0].length);
-				st.equal(result.written, pair[1].length);
+				st.deepEqual(result, { read: pair[0].length, written: pair[1].length });
 
 				var expectedResult = new Uint8Array(pair[1].concat(allFF.slice(pair[1].length)));
 				st.deepEqual(target, expectedResult, 'decoding ' + pair[0]);
@@ -573,8 +623,7 @@ module.exports = {
 			forEach(whitespaceKinds, function (pair) {
 				var target = new Uint8Array([255, 255, 255]);
 				var result = method(target, pair[0]);
-				st.equal(result.read, 5);
-				st.equal(result.written, 1);
+				st.deepEqual(result, { read: 5, written: 1 });
 				st.deepEqual(target, new Uint8Array([102, 255, 255]), 'ascii whitespace: ' + pair[1]);
 			});
 
