@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.0.2](https://github.com/es-shims/es-arraybuffer-base64/compare/v1.0.1...v1.0.2) - 2024-03-14
+
+### Commits
+
+- [Tests] add more coverage from https://github.com/tc39/test262/pull/3994 [`b0d4dd8`](https://github.com/es-shims/es-arraybuffer-base64/commit/b0d4dd8d7189c3b7b95d4c9ad5d241bc05b95d8e)
+- [Fix] add missing `exports` entries [`e260b77`](https://github.com/es-shims/es-arraybuffer-base64/commit/e260b7740f6cd804118bef74b28e958bf501f93b)
+- [Deps] update `safe-array-concat`, `which-typed-array` [`06f7137`](https://github.com/es-shims/es-arraybuffer-base64/commit/06f713723ca205fbc29b0663aa6f317f757b0cb2)
+
 ## [v1.0.1](https://github.com/es-shims/es-arraybuffer-base64/compare/v1.0.0...v1.0.1) - 2024-02-28
 
 ### Commits
