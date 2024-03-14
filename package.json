@@ -27,6 +27,16 @@
 		"./Uint8Array.prototype.toHex/polyfill": "./Uint8Array.prototype.toHex/polyfill.js",
 		"./Uint8Array.prototype.toHex/implementation": "./Uint8Array.prototype.toHex/implementation.js",
 		"./Uint8Array.prototype.toHex/shim": "./Uint8Array.prototype.toHex/shim.js",
+		"./Uint8Array.prototype.setFromHex": "./Uint8Array.prototype.setFromHex/index.js",
+		"./Uint8Array.prototype.setFromHex/auto": "./Uint8Array.prototype.setFromHex/auto.js",
+		"./Uint8Array.prototype.setFromHex/polyfill": "./Uint8Array.prototype.setFromHex/polyfill.js",
+		"./Uint8Array.prototype.setFromHex/implementation": "./Uint8Array.prototype.setFromHex/implementation.js",
+		"./Uint8Array.prototype.setFromHex/shim": "./Uint8Array.prototype.setFromHex/shim.js",
+		"./Uint8Array.prototype.setFromBase64": "./Uint8Array.prototype.setFromBase64/index.js",
+		"./Uint8Array.prototype.setFromBase64/auto": "./Uint8Array.prototype.setFromBase64/auto.js",
+		"./Uint8Array.prototype.setFromBase64/polyfill": "./Uint8Array.prototype.setFromBase64/polyfill.js",
+		"./Uint8Array.prototype.setFromBase64/implementation": "./Uint8Array.prototype.setFromBase64/implementation.js",
+		"./Uint8Array.prototype.setFromBase64/shim": "./Uint8Array.prototype.setFromBase64/shim.js",
 		"./package.json": "./package.json"
 	},
 	"scripts": {
