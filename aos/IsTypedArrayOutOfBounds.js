@@ -2,8 +2,8 @@
 
 var $TypeError = require('es-errors/type');
 
-var IsDetachedBuffer = require('es-abstract/2023/IsDetachedBuffer');
-var TypedArrayElementSize = require('es-abstract/2023/TypedArrayElementSize');
+var IsDetachedBuffer = require('es-abstract/2024/IsDetachedBuffer');
+var TypedArrayElementSize = require('es-abstract/2024/TypedArrayElementSize');
 
 // var isTypedArrayWithBufferWitnessRecord = require('es-abstract/helpers/records/typed-array-with-buffer-witness-record');
 

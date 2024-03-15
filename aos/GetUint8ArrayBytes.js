@@ -4,7 +4,7 @@ var $TypeError = require('es-errors/type');
 
 var callBound = require('call-bind/callBound');
 
-var GetValueFromBuffer = require('es-abstract/2023/GetValueFromBuffer');
+var GetValueFromBuffer = require('es-abstract/2024/GetValueFromBuffer');
 var IsTypedArrayOutOfBounds = require('./IsTypedArrayOutOfBounds');
 var MakeTypedArrayWithBufferWitnessRecord = require('./MakeTypedArrayWithBufferWitnessRecord');
 var TypedArrayLength = require('./TypedArrayLength');
@@ -39,7 +39,7 @@ module.exports = function GetUint8ArrayBytes(ta) {
 	while (index < len) { // step 8
 		var byteIndex = byteOffset + index; // step 8.a
 
-		var byte = GetValueFromBuffer(buffer, byteIndex, 'Uint8', true, 'Unordered'); // step 8.b
+		var byte = GetValueFromBuffer(buffer, byteIndex, 'UINT8', true, 'UNORDERED'); // step 8.b
 
 		$push(bytes, byte); // step 8.c
 

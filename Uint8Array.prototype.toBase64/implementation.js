@@ -2,7 +2,7 @@
 
 var $TypeError = require('es-errors/type');
 
-var Get = require('es-abstract/2023/Get');
+var Get = require('es-abstract/2024/Get');
 var GetOptionsObject = require('../aos/GetOptionsObject');
 var GetUint8ArrayBytes = require('../aos/GetUint8ArrayBytes');
 var ValidateUint8Array = require('../aos/ValidateUint8Array');

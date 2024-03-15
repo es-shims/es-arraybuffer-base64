@@ -7,13 +7,13 @@ var $TypeError = require('es-errors/type');
 var $Uint8Array = GetIntrinsic('%Uint8Array%', true);
 
 var FromBase64 = require('../aos/FromBase64');
-var Get = require('es-abstract/2023/Get');
+var Get = require('es-abstract/2024/Get');
 var GetOptionsObject = require('../aos/GetOptionsObject');
-var IsTypedArrayOutOfBounds = require('../aos/IsTypedArrayOutOfBounds');
-var MakeTypedArrayWithBufferWitnessRecord = require('../aos/MakeTypedArrayWithBufferWitnessRecord');
+var IsTypedArrayOutOfBounds = require('es-abstract/2024/IsTypedArrayOutOfBounds');
+var MakeTypedArrayWithBufferWitnessRecord = require('es-abstract/2024/MakeTypedArrayWithBufferWitnessRecord');
 var SetUint8ArrayBytes = require('../aos/SetUint8ArrayBytes');
-var SetValueInBuffer = require('es-abstract/2023/SetValueInBuffer');
-var TypedArrayByteLength = require('../aos/TypedArrayByteLength');
+var SetValueInBuffer = require('es-abstract/2024/SetValueInBuffer');
+var TypedArrayByteLength = require('es-abstract/2024/TypedArrayByteLength');
 var ValidateUint8Array = require('../aos/ValidateUint8Array');
 
 var typedArrayByteOffset = require('typed-array-byte-offset');
@@ -93,7 +93,7 @@ module.exports = function setFromBase64(string) {
 
 		var byteIndexInBuffer = index + offset; // step 24.b
 
-		SetValueInBuffer(intoBuffer, byteIndexInBuffer, 'Uint8', byte, true, 'Unordered'); // step 24.c
+		SetValueInBuffer(intoBuffer, byteIndexInBuffer, 'UINT8', byte, true, 'UNORDERED'); // step 24.c
 
 		index += 1; // step 24.d
 	}

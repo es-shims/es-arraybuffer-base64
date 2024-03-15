@@ -2,7 +2,7 @@
 
 var callBind = require('call-bind');
 var defineProperties = require('define-properties');
-var DetachArrayBuffer = require('es-abstract/2023/DetachArrayBuffer');
+var DetachArrayBuffer = require('es-abstract/2024/DetachArrayBuffer');
 var forEach = require('es-abstract/helpers/forEach');
 var isCore = require('is-core-module');
 var test = require('tape');

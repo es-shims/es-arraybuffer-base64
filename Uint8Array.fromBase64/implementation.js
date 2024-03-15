@@ -7,7 +7,7 @@ var $TypeError = require('es-errors/type');
 var $Uint8Array = GetIntrinsic('%Uint8Array%', true);
 
 var FromBase64 = require('../aos/FromBase64');
-var Get = require('es-abstract/2023/Get');
+var Get = require('es-abstract/2024/Get');
 var GetOptionsObject = require('../aos/GetOptionsObject');
 
 module.exports = function fromBase64(string) {

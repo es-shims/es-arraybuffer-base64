@@ -2,10 +2,10 @@
 
 var $TypeError = require('es-errors/type');
 
-var floor = require('es-abstract/2023/floor');
+var floor = require('es-abstract/2024/floor');
 var IsFixedLengthArrayBuffer = require('./IsFixedLengthArrayBuffer');
 var IsTypedArrayOutOfBounds = require('./IsTypedArrayOutOfBounds');
-var TypedArrayElementSize = require('es-abstract/2023/TypedArrayElementSize');
+var TypedArrayElementSize = require('es-abstract/2024/TypedArrayElementSize');
 
 var typedArrayBuffer = require('typed-array-buffer');
 var typedArrayByteOffset = require('typed-array-byte-offset');

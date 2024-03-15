@@ -1,6 +1,6 @@
 'use strict';
 
-var SetValueInBuffer = require('es-abstract/2023/SetValueInBuffer');
+var SetValueInBuffer = require('es-abstract/2024/SetValueInBuffer');
 var ValidateUint8Array = require('./ValidateUint8Array');
 
 var typedArrayBuffer = require('typed-array-buffer');
@@ -20,7 +20,7 @@ module.exports = function SetUint8ArrayBytes(into, bytes) {
 	while (index < len) { // step 4
 		var byte = bytes[index]; // step 4.a
 		var byteIndexInBuffer = index + offset; // step 4.b
-		SetValueInBuffer(typedArrayBuffer(into), byteIndexInBuffer, 'Uint8', byte, true, 'Unordered'); // step 4.c
+		SetValueInBuffer(typedArrayBuffer(into), byteIndexInBuffer, 'UINT8', byte, true, 'UNORDERED'); // step 4.c
 		index += 1; // step 4.d
 	}
 };

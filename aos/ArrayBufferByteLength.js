@@ -4,7 +4,7 @@ var $TypeError = require('es-errors/type');
 
 // https://tc39.es/ecma262/#sec-arraybufferbytelength
 
-var IsDetachedBuffer = require('es-abstract/2023/IsDetachedBuffer');
+var IsDetachedBuffer = require('es-abstract/2024/IsDetachedBuffer');
 
 var isArrayBuffer = require('is-array-buffer');
 var isSharedArrayBuffer = require('is-shared-array-buffer');

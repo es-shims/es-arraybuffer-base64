@@ -6,8 +6,8 @@ var $parseInt = GetIntrinsic('%parseInt%');
 var $SyntaxError = require('es-errors/syntax');
 var $TypeError = require('es-errors/type');
 
-var modulo = require('es-abstract/2023/modulo');
-var substring = require('es-abstract/2023/substring');
+var modulo = require('es-abstract/2024/modulo');
+var substring = require('es-abstract/2024/substring');
 
 var isInteger = require('es-abstract/helpers/isInteger');
 var MAX_SAFE_INTEGER = require('es-abstract/helpers/maxSafeInteger');

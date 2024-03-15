@@ -3,7 +3,7 @@
 var $TypeError = require('es-errors/type');
 
 var ArrayBufferByteLength = require('./ArrayBufferByteLength');
-var IsDetachedBuffer = require('es-abstract/2023/IsDetachedBuffer');
+var IsDetachedBuffer = require('es-abstract/2024/IsDetachedBuffer');
 
 var isTypedArray = require('is-typed-array');
 var typedArrayBuffer = require('typed-array-buffer');

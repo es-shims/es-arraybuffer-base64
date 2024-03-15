@@ -2,8 +2,8 @@
 
 var $TypeError = require('es-errors/type');
 
-var OrdinaryObjectCreate = require('es-abstract/2023/OrdinaryObjectCreate');
-var Type = require('es-abstract/2023/Type');
+var OrdinaryObjectCreate = require('es-abstract/2024/OrdinaryObjectCreate');
+var Type = require('es-abstract/2024/Type');
 
 module.exports = function GetOptionsObject(options) {
 	if (typeof options === 'undefined') { // step 1
