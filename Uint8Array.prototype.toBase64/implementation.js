@@ -27,16 +27,12 @@ module.exports = function toBase64() {
 		alphabet = 'base64'; // step 5
 	}
 
-	if (typeof alphabet !== 'string') {
-		throw new $TypeError('`alphabet` is not a string: ' + typeof alphabet); // step 6
-	}
-
 	if (alphabet !== 'base64' && alphabet !== 'base64url') {
-		throw new $TypeError('Invalid alphabet'); // step 7
+		throw new $TypeError('Assertion failed: `alphabet` is not `\'base64\'` or `\'base64url\'`: ' + (typeof alphabet === 'string' ? alphabet : typeof alphabet)); // step 6
 	}
 
 	// eslint-disable-next-line no-unused-vars
-	var toEncode = GetUint8ArrayBytes(O); // step 8
+	var toEncode = GetUint8ArrayBytes(O); // step 7
 
 	// if (alphabet === 'base64') { // step 8
 	// 		a. Let outAscii be the sequence of code points which results from encoding toEncode according to the base64 encoding specified in section 4 of RFC 4648.
@@ -45,7 +41,7 @@ module.exports = function toBase64() {
 	// 		b. Let outAscii be the sequence of code points which results from encoding toEncode according to the base64url encoding specified in section 5 of RFC 4648.
 	// }
 
-	// return CodePointsToString(outAscii); // step 10
+	// return CodePointsToString(outAscii); // step 9
 
 	// code adapted from https://github.com/tc39/proposal-arraybuffer-base64/blob/22228812214d5a1c2966cd626f43be3576e79290/playground/polyfill-core.mjs
 	var lookup = alphabetFromIdentifier(alphabet);

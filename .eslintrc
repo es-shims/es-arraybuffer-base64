@@ -29,7 +29,7 @@
 				"SetUint8ArrayBytes",
 				"SetValueInBuffer",
 				"StringPad",
-				"TypedArrayByteLength",
+				"TypedArrayLength",
 				"ValidateUint8Array",
 			],
 		}],

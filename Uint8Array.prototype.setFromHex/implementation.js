@@ -9,7 +9,7 @@ var $Uint8Array = GetIntrinsic('%Uint8Array%', true);
 var FromHex = require('../aos/FromHex');
 var IsTypedArrayOutOfBounds = require('es-abstract/2024/IsTypedArrayOutOfBounds');
 var MakeTypedArrayWithBufferWitnessRecord = require('es-abstract/2024/MakeTypedArrayWithBufferWitnessRecord');
-var TypedArrayByteLength = require('es-abstract/2024/TypedArrayByteLength');
+var TypedArrayLength = require('es-abstract/2024/TypedArrayLength');
 var ValidateUint8Array = require('../aos/ValidateUint8Array');
 var SetUint8ArrayBytes = require('../aos/SetUint8ArrayBytes');
 
@@ -32,30 +32,28 @@ module.exports = function setFromHex(string) {
 		throw new $TypeError('fromHexInto called on Typed Array backed by detached buffer'); // step 5
 	}
 
-	var byteLength = TypedArrayByteLength(taRecord); // step 6
+	var byteLength = TypedArrayLength(taRecord); // step 6
 
-	var maxLength = byteLength; // step 7
+	var result = FromHex(string, byteLength); // step 7
 
-	var result = FromHex(string, maxLength); // step 8
+	var bytes = result['[[Bytes]]']; // step 8
 
-	var bytes = result['[[Bytes]]']; // step 9
+	var written = bytes.length; // step 9
 
-	var written = bytes.length; // step 10
-
-	// 11. NOTE: FromHex does not invoke any user code, so the ArrayBuffer backing into cannot have been detached or shrunk.
+	// 10. NOTE: FromHex does not invoke any user code, so the ArrayBuffer backing into cannot have been detached or shrunk.
 
 	if (written > byteLength) {
-		throw new $TypeError('Assertion failed: written is not <= byteLength'); // step 12
+		throw new $TypeError('Assertion failed: written is not <= byteLength'); // step 11
 	}
 
-	SetUint8ArrayBytes(into, bytes); // step 13
+	SetUint8ArrayBytes(into, bytes); // step 12
 
-	// var resultObject = {}; // step 14 // OrdinaryObjectCreate(%Object.prototype%)
-	// CreateDataPropertyOrThrow(resultObject, 'read', result['[[Read]]']); // step 15
-	// CreateDataPropertyOrThrow(resultObject, 'written', written); // step 16
-	// return resultObject; // step 17
+	// var resultObject = {}; // step 13 // OrdinaryObjectCreate(%Object.prototype%)
+	// CreateDataPropertyOrThrow(resultObject, 'read', result['[[Read]]']); // step 14
+	// CreateDataPropertyOrThrow(resultObject, 'written', written); // step 15
+	// return resultObject; // step 16
 
-	return { // steps 14 - 17
+	return { // steps 13 - 16
 		read: result['[[Read]]'],
 		written: written
 	};

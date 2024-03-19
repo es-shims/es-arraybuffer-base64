@@ -27,33 +27,29 @@ module.exports = function fromBase64(string) {
 		alphabet = 'base64'; // step 4
 	}
 
-	if (typeof alphabet !== 'string') {
-		throw new $TypeError('`alphabet` is not a string: ' + string); // step 5
-	}
-
 	if (alphabet !== 'base64' && alphabet !== 'base64url') {
-		throw new $TypeError('Invalid alphabet'); // step 6
+		throw new $TypeError('Assertion failed: `alphabet` is not `\'base64\'` or `\'base64url\'`: ' + (typeof alphabet === 'string' ? alphabet : typeof alphabet)); // step 5
 	}
 
-	var lastChunkHandling = Get(opts, 'lastChunkHandling'); // step 7
+	var lastChunkHandling = Get(opts, 'lastChunkHandling'); // step 6
 
 	if (typeof lastChunkHandling === 'undefined') {
-		lastChunkHandling = 'loose'; // step 8
+		lastChunkHandling = 'loose'; // step 7
 	}
 
 	if (lastChunkHandling !== 'loose' && lastChunkHandling !== 'strict' && lastChunkHandling !== 'stop-before-partial') {
-		throw new $TypeError('`lastChunkHandling` must be `\'loose\'`, `\'strict\'`, or `\'stop-before-partial\'`'); // step 9
+		throw new $TypeError('`lastChunkHandling` must be `\'loose\'`, `\'strict\'`, or `\'stop-before-partial\'`'); // step 8
 	}
 
-	var result = FromBase64(string, alphabet, lastChunkHandling); // step 10
+	var result = FromBase64(string, alphabet, lastChunkHandling); // step 9
 
-	// var resultLength = result['[[Bytes]]']; // step 11
+	// var resultLength = result['[[Bytes]]']; // step 10
 
-	// 12. Let ta be ? AllocateTypedArray("Uint8Array", %Uint8Array%, "%Uint8Array.prototype%", resultLength).
+	// 11. Let ta be ? AllocateTypedArray("Uint8Array", %Uint8Array%, "%Uint8Array.prototype%", resultLength).
 
-	// 13. Set the value at each index of ta.[[ViewedArrayBuffer]].[[ArrayBufferData]] to the value at the corresponding index of result.[[Bytes]].
+	// 12. Set the value at each index of ta.[[ViewedArrayBuffer]].[[ArrayBufferData]] to the value at the corresponding index of result.[[Bytes]].
 
-	// 14. Return ta.
+	// 13. Return ta.
 
-	return new $Uint8Array(result['[[Bytes]]']); // step 11 - 14
+	return new $Uint8Array(result['[[Bytes]]']); // step 10 - 13
 };
