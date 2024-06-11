@@ -228,10 +228,14 @@ module.exports = {
 			// standard test vectors from https://datatracker.ietf.org/doc/html/rfc4648#section-10
 			st.equal(method(new Uint8Array([])), '');
 			st.equal(method(new Uint8Array([102])), 'Zg==');
+			st.equal(method(new Uint8Array([102]), { omitPadding: true }), 'Zg');
 			st.equal(method(new Uint8Array([102, 111])), 'Zm8=');
+			st.equal(method(new Uint8Array([102, 111]), { omitPadding: true }), 'Zm8');
 			st.equal(method(new Uint8Array([102, 111, 111])), 'Zm9v');
 			st.equal(method(new Uint8Array([102, 111, 111, 98])), 'Zm9vYg==');
+			st.equal(method(new Uint8Array([102, 111, 111, 98]), { omitPadding: true }), 'Zm9vYg');
 			st.equal(method(new Uint8Array([102, 111, 111, 98, 97])), 'Zm9vYmE=');
+			st.equal(method(new Uint8Array([102, 111, 111, 98, 97]), { omitPadding: true }), 'Zm9vYmE');
 			st.equal(method(new Uint8Array([102, 111, 111, 98, 97, 114])), 'Zm9vYmFy');
 
 			st.end();

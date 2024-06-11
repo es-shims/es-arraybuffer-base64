@@ -16,9 +16,9 @@
 		"multiline-comment-style": "off",
 		"new-cap": ["error", {
 			"capIsNewExceptions": [
+				"DetachArrayBuffer",
 				"FromBase64",
 				"FromHex",
-				"DetachArrayBuffer",
 				"Get",
 				"GetIntrinsic",
 				"GetOptionsObject",
@@ -29,6 +29,7 @@
 				"SetUint8ArrayBytes",
 				"SetValueInBuffer",
 				"StringPad",
+				"ToBoolean",
 				"TypedArrayLength",
 				"ValidateUint8Array",
 			],
