@@ -19,13 +19,17 @@ module.exports = function fromHex(string) {
 
 	var result = FromHex(string); // step 2
 
-	// var resultLength = result['[[Bytes]]']; // step 3
+	if (result['[[Error]]']) { // step 3
+		throw result['[[Error]]']; // step 3.a
+	}
 
-	// 4. Let ta be ? AllocateTypedArray("Uint8Array", %Uint8Array%, "%Uint8Array.prototype%", resultLength).
+	// var resultLength = result['[[Bytes]]']; // step 4
 
-	// 5. Set the value at each index of ta.[[ViewedArrayBuffer]].[[ArrayBufferData]] to the value at the corresponding index of result.[[Bytes]].
+	// 5. Let ta be ? AllocateTypedArray("Uint8Array", %Uint8Array%, "%Uint8Array.prototype%", resultLength).
 
-	// 6. Return ta.
+	// 6. Set the value at each index of ta.[[ViewedArrayBuffer]].[[ArrayBufferData]] to the value at the corresponding index of result.[[Bytes]].
 
-	return new $Uint8Array(result['[[Bytes]]']); // steps 3 - 6
+	// 7. Return ta.
+
+	return new $Uint8Array(result['[[Bytes]]']); // steps 4 - 7
 };

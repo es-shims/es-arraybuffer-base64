@@ -18,6 +18,8 @@ var safeArrayConcat = require('safe-array-concat');
 
 var $strIndexOf = callBound('String.prototype.indexOf');
 
+/* eslint no-redeclare: 0 */
+
 // https://tc39.es/proposal-arraybuffer-base64/spec/#sec-frombase64
 
 module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
@@ -42,7 +44,11 @@ module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
 	// 2. NOTE: The order of validation and decoding in the algorithm below is not observable. Implementations are encouraged to perform them in whatever order is most efficient, possibly interleaving validation with decoding, as long as the behaviour is observably equivalent.
 
 	if (maxLength === 0) { // step 3
-		return { '[[Read]]': 0, '[[Bytes]]': [] }; // step 3.a
+		return {
+			'[[Read]]': 0,
+			'[[Bytes]]': [],
+			'[[Error]]': null
+		}; // step 3.a
 	}
 
 	var read = 0; // step 4
@@ -64,19 +70,45 @@ module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
 		if (index === length) { // step 10.b
 			if (chunkLength > 0) { // step 10.b.i
 				if (lastChunkHandling === 'stop-before-partial') { // step 10.b.i.1
-					return { '[[Read]]': read, '[[Bytes]]': bytes }; // step 10.b.i.1.a
+					return {
+						'[[Read]]': read,
+						'[[Bytes]]': bytes,
+						'[[Error]]': null
+					}; // step 10.b.i.1.a
 				} else if (lastChunkHandling === 'loose') { // step 10.b.i.2
 					if (chunkLength === 1) { // step 10.b.i.2.a
-						throw new $SyntaxError('malformed padding: exactly one additional character'); // step 10.b.i.2.a.1
+						var error = new $SyntaxError('malformed padding: exactly one additional character'); // step 10.b.i.2.a.i
+						return {
+							'[[Read]]': read,
+							'[[Bytes]]': bytes,
+							'[[Error]]': error
+						}; // step 10.b.i.2.a.ii
 					}
 
-					bytes = safeArrayConcat(bytes, DecodeBase64Chunk(chunk, false)); // step 10.b.i.2.b
+					try {
+						bytes = safeArrayConcat(bytes, DecodeBase64Chunk(chunk, false)); // step 10.b.i.2.b
+					} catch (e) {
+						return {
+							'[[Read]]': read,
+							'[[Bytes]]': bytes,
+							'[[Error]]': e
+						}; // step 10.b.i.2.c ?
+					}
 				} else { // step 10.b.i.3
 					// Assert: lastChunkHandling is "strict".
-					throw new $SyntaxError('missing padding'); // step 10.b.i.3.b
+					var error = new $SyntaxError('missing padding'); // step 10.b.i.3.b
+					return {
+						'[[Read]]': read,
+						'[[Bytes]]': bytes,
+						'[[Error]]': error
+					}; // step 10.b.i.3.c
 				}
 			}
-			return { '[[Read]]': length, '[[Bytes]]': bytes }; // step 10.b.ii
+			return {
+				'[[Read]]': length,
+				'[[Bytes]]': bytes,
+				'[[Error]]': null
+			}; // step 10.b.ii
 		}
 		var char = substring(string, index, index + 1); // step 10.c
 
@@ -84,7 +116,12 @@ module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
 
 		if (char === '=') { // step 10.e
 			if (chunkLength < 2) { // step 10.e.i
-				throw new $SyntaxError('padding is too early'); // step 10.e.i.1
+				var error = new $SyntaxError('padding is too early'); // step 10.e.i.1
+				return {
+					'[[Read]]': read,
+					'[[Bytes]]': bytes,
+					'[[Error]]': error
+				}; // step 10.e.i.2
 			}
 
 			index = SkipAsciiWhitespace(string, index); // step 10.e.ii
@@ -92,9 +129,18 @@ module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
 			if (chunkLength === 2) { // step 10.e.iii
 				if (index === length) { // step 10.e.iii.1
 					if (lastChunkHandling === 'stop-before-partial') { // step 10.e.iii.1.a
-						return { '[[Read]]': read, '[[Bytes]]': bytes }; // step 10.e.iii.1.a.i
+						return {
+							'[[Read]]': read,
+							'[[Bytes]]': bytes,
+							'[[Error]]': null
+						}; // step 10.e.iii.1.a.i
 					}
-					throw new $SyntaxError('malformed padding - only one ='); // step 10.e.iii.1.b
+					var error = new $SyntaxError('malformed padding - only one ='); // step 10.e.iii.1.b
+					return {
+						'[[Read]]': read,
+						'[[Bytes]]': bytes,
+						'[[Error]]': error
+					}; // step 10.e.iii.1.c
 				}
 
 				char = substring(string, index, index + 1); // step 10.e.iii.2
@@ -105,19 +151,33 @@ module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
 			}
 
 			if (index < length) { // step 10.e.iv
-				throw new $SyntaxError('unexpected character after padding'); // step 10.e.iv.1
+				var error = new $SyntaxError('unexpected character after padding'); // step 10.e.iv.1
+				return {
+					'[[Read]]': read,
+					'[[Bytes]]': bytes,
+					'[[Error]]': error
+				}; // step 10.e.iv.2
 			}
 
 			var throwOnExtraBits = lastChunkHandling === 'strict'; // step 10.e.v - vi
 
 			bytes = safeArrayConcat(bytes, DecodeBase64Chunk(chunk, throwOnExtraBits)); // step 10.e.vii
 
-			return { '[[Read]]': length, '[[Bytes]]': bytes }; // step 10.e.viii
+			return {
+				'[[Read]]': length,
+				'[[Bytes]]': bytes,
+				'[[Error]]': null
+			}; // step 10.e.viii
 		}
 
 		if (alphabet === 'base64url') { // step 10.f
 			if (char === '+' || char === '/') { // step 10.f.i
-				throw new $SyntaxError('unexpected character ' + char); // step 10.f.i.1
+				var error = new $SyntaxError('unexpected character ' + char); // step 10.f.i.1
+				return {
+					'[[Read]]': read,
+					'[[Bytes]]': bytes,
+					'[[Error]]': error
+				}; // step 10.f.i.2
 			} else if (char === '-') {
 				char = '+'; // step 10.f.ii
 			} else if (char === '_') {
@@ -127,7 +187,12 @@ module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
 
 		// g. If char is not an element of the standard base64 alphabet, throw a SyntaxError exception.
 		if ($strIndexOf(alphabetFromIdentifier('base64'), char) < 0) { // step 10.g
-			throw new $SyntaxError('unexpected character ' + char);
+			var error = new $SyntaxError('unexpected character ' + char); // step 10.g.i
+			return {
+				'[[Read]]': read,
+				'[[Bytes]]': bytes,
+				'[[Error]]': error
+			}; // step 10.g.ii
 		}
 
 		var remaining = maxLength - bytes.length; // step 10.h
@@ -136,7 +201,11 @@ module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
 			(remaining === 1 && chunkLength === 2)
             || (remaining === 2 && chunkLength === 3)
 		) { // step 10.i
-			return { '[[Read]]': read, '[[Bytes]]': bytes }; // step 10.i.1
+			return {
+				'[[Read]]': read,
+				'[[Bytes]]': bytes,
+				'[[Error]]': null
+			}; // step 10.i.1
 		}
 
 		chunk += char; // step 10.j
@@ -153,7 +222,11 @@ module.exports = function FromBase64(string, alphabet, lastChunkHandling) {
 			read = index; // step 10.l.iv
 
 			if (bytes.length >= maxLength) { // step 10.l.v
-				return { '[[Read]]': read, '[[Bytes]]': bytes }; // step 10.l.v.1
+				return {
+					'[[Read]]': read,
+					'[[Bytes]]': bytes,
+					'[[Error]]': null
+				}; // step 10.l.v.1
 			}
 		}
 	}

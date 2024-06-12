@@ -36,24 +36,28 @@ module.exports = function setFromHex(string) {
 
 	var result = FromHex(string, byteLength); // step 7
 
-	var bytes = result['[[Bytes]]']; // step 8
-
-	var written = bytes.length; // step 9
-
-	// 10. NOTE: FromHex does not invoke any user code, so the ArrayBuffer backing into cannot have been detached or shrunk.
-
-	if (written > byteLength) {
-		throw new $TypeError('Assertion failed: written is not <= byteLength'); // step 11
+	if (result['[[Error]]']) { // step 8
+		throw result['[[Error]]']; // step 8.a
 	}
 
-	SetUint8ArrayBytes(into, bytes); // step 12
+	var bytes = result['[[Bytes]]']; // step 9
 
-	// var resultObject = {}; // step 13 // OrdinaryObjectCreate(%Object.prototype%)
-	// CreateDataPropertyOrThrow(resultObject, 'read', result['[[Read]]']); // step 14
-	// CreateDataPropertyOrThrow(resultObject, 'written', written); // step 15
-	// return resultObject; // step 16
+	var written = bytes.length; // step 10
 
-	return { // steps 13 - 16
+	// 11. NOTE: FromHex does not invoke any user code, so the ArrayBuffer backing into cannot have been detached or shrunk.
+
+	if (written > byteLength) {
+		throw new $TypeError('Assertion failed: written is not <= byteLength'); // step 12
+	}
+
+	SetUint8ArrayBytes(into, bytes); // step 13
+
+	// var resultObject = {}; // step 14 // OrdinaryObjectCreate(%Object.prototype%)
+	// CreateDataPropertyOrThrow(resultObject, 'read', result['[[Read]]']); // step 15
+	// CreateDataPropertyOrThrow(resultObject, 'written', written); // step 16
+	// return resultObject; // step 17
+
+	return { // steps 14 - 17
 		read: result['[[Read]]'],
 		written: written
 	};

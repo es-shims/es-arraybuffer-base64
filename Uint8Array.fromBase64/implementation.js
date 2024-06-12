@@ -43,13 +43,17 @@ module.exports = function fromBase64(string) {
 
 	var result = FromBase64(string, alphabet, lastChunkHandling); // step 9
 
-	// var resultLength = result['[[Bytes]]']; // step 10
+	if (result['[[Error]]']) { // step 10
+		throw result['[[Error]]']; // step 10.a
+	}
 
-	// 11. Let ta be ? AllocateTypedArray("Uint8Array", %Uint8Array%, "%Uint8Array.prototype%", resultLength).
+	// var resultLength = result['[[Bytes]]']; // step 11
 
-	// 12. Set the value at each index of ta.[[ViewedArrayBuffer]].[[ArrayBufferData]] to the value at the corresponding index of result.[[Bytes]].
+	// 12. Let ta be ? AllocateTypedArray("Uint8Array", %Uint8Array%, "%Uint8Array.prototype%", resultLength).
 
-	// 13. Return ta.
+	// 13. Set the value at each index of ta.[[ViewedArrayBuffer]].[[ArrayBufferData]] to the value at the corresponding index of result.[[Bytes]].
 
-	return new $Uint8Array(result['[[Bytes]]']); // step 10 - 13
+	// 14. Return ta.
+
+	return new $Uint8Array(result['[[Bytes]]']); // step 11 - 14
 };

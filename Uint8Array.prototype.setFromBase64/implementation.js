@@ -64,40 +64,44 @@ module.exports = function setFromBase64(string) {
 
 	var result = FromBase64(string, alphabet, lastChunkHandling, byteLength); // step 14
 
-	var bytes = result['[[Bytes]]']; // step 15
-
-	var written = bytes.length; // step 16
-
-	// 17. NOTE: FromBase64 does not invoke any user code, so the ArrayBuffer backing into cannot have been detached or shrunk.
-
-	if (written > byteLength) {
-		throw new $TypeError('Assertion failed: written is not <= byteLength'); // step 18
+	if (result['[[Error]]']) { // step 15
+		throw result['[[Error]]']; // step 15.a
 	}
 
-	SetUint8ArrayBytes(into, bytes); // step 19
+	var bytes = result['[[Bytes]]']; // step 16
 
-	var offset = typedArrayByteOffset(into); // step 20
+	var written = bytes.length; // step 17
 
-	var index = 0; // step 21
+	// 18. NOTE: FromBase64 does not invoke any user code, so the ArrayBuffer backing into cannot have been detached or shrunk.
+
+	if (written > byteLength) {
+		throw new $TypeError('Assertion failed: written is not <= byteLength'); // step 19
+	}
+
+	SetUint8ArrayBytes(into, bytes); // step 20
+
+	var offset = typedArrayByteOffset(into); // step 21
+
+	var index = 0; // step 22
 
 	var intoBuffer = typedArrayBuffer(into);
 
-	while (index < written) { // step 22
-		var byte = bytes[index]; // step 22.a
+	while (index < written) { // step 23
+		var byte = bytes[index]; // step 23.a
 
-		var byteIndexInBuffer = index + offset; // step 22.b
+		var byteIndexInBuffer = index + offset; // step 23.b
 
-		SetValueInBuffer(intoBuffer, byteIndexInBuffer, 'UINT8', byte, true, 'UNORDERED'); // step 22.c
+		SetValueInBuffer(intoBuffer, byteIndexInBuffer, 'UINT8', byte, true, 'UNORDERED'); // step 23.c
 
-		index += 1; // step 22.d
+		index += 1; // step 23.d
 	}
 
-	// 23. Let resultObject be OrdinaryObjectCreate(%Object.prototype%).
-	// 24. Perform ! CreateDataPropertyOrThrow(resultObject, "read", 𝔽(result.[[Read]])).
-	// 25. Perform ! CreateDataPropertyOrThrow(resultObject, "written", 𝔽(written)).
-	// 26. Return resultObject.
+	// 24. Let resultObject be OrdinaryObjectCreate(%Object.prototype%).
+	// 25. Perform ! CreateDataPropertyOrThrow(resultObject, "read", 𝔽(result.[[Read]])).
+	// 26. Perform ! CreateDataPropertyOrThrow(resultObject, "written", 𝔽(written)).
+	// 27. Return resultObject.
 
-	return { // steps 23 - 26
+	return { // steps 24 - 27
 		read: result['[[Read]]'],
 		written: written
 	};
