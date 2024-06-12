@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.0](https://github.com/es-shims/es-arraybuffer-base64/compare/v1.0.3...v1.1.0) - 2024-06-12
+
+### Commits
+
+- [patch] `FromHex` AO spec changes [`1dd5e0a`](https://github.com/es-shims/es-arraybuffer-base64/commit/1dd5e0a431b69ffec474d228ea84321506af6ef1)
+- [Refactor] editorial tweaks from https://github.com/tc39/proposal-arraybuffer-base64/pull/55 [`f11b293`](https://github.com/es-shims/es-arraybuffer-base64/commit/f11b29372e05b3d2f901901e9bb20d2ebd8cb3c5)
+- [New] `Uint8Array.prototype.toBase64`: add `omitPadding` option, per spec [`e195980`](https://github.com/es-shims/es-arraybuffer-base64/commit/e195980399ce33f4a76b8afc3e55343eb0c28fff)
+- [Deps] update `es-abstract`, `typed-array-length` [`ea55cf0`](https://github.com/es-shims/es-arraybuffer-base64/commit/ea55cf01723da8684cf2daa24d3246554bb4ef2a)
+- [Dev Deps] update `@ljharb/eslint-config` [`71eff04`](https://github.com/es-shims/es-arraybuffer-base64/commit/71eff0403e9bd7e46a2d7b77c9bdf073efc318d1)
+- [Deps] update `es-abstract` [`eece9c4`](https://github.com/es-shims/es-arraybuffer-base64/commit/eece9c47af89963b067b213ec674a0ab1d5a744c)
+
 ## [v1.0.3](https://github.com/es-shims/es-arraybuffer-base64/compare/v1.0.2...v1.0.3) - 2024-03-15
 
 ### Commits
