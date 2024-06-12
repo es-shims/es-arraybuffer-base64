@@ -72,7 +72,7 @@
 		"Uint8Array"
 	],
 	"devDependencies": {
-		"@ljharb/eslint-config": "^21.1.0",
+		"@ljharb/eslint-config": "^21.1.1",
 		"aud": "^2.0.4",
 		"auto-changelog": "^2.4.0",
 		"available-typed-arrays": "^1.0.7",
