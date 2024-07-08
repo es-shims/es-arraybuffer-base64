@@ -181,6 +181,26 @@ module.exports = {
 				s2t.end();
 			});
 
+			st.test('test262: test/built-ins/Uint8Array/prototype/setFromHex/writes-up-to-error', function (s2t) {
+				['aaa ', 'aaag'].forEach(function (value) {
+					var target = new Uint8Array([255, 255, 255, 255, 255]);
+					s2t['throws'](
+						function () { method(target, value); },
+						SyntaxError
+					);
+					s2t.deepEqual(target, new Uint8Array([170, 255, 255, 255, 255]), 'decoding from ' + value);
+				});
+
+				var target = new Uint8Array([255, 255, 255, 255, 255]);
+				s2t['throws'](
+					function () { method(target, 'aaa'); },
+					SyntaxError
+				);
+				s2t.deepEqual(target, new Uint8Array([255, 255, 255, 255, 255]), 'when length is odd no data is written');
+
+				s2t.end();
+			});
+
 			st.end();
 		});
 	},

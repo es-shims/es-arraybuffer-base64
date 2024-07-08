@@ -574,6 +574,46 @@ module.exports = {
 				s2t.end();
 			});
 
+			st.test('test262: test/built-ins/Uint8Array/prototype/setFromBase64/writes-up-to-error', function (s2t) {
+				var target = new Uint8Array([255, 255, 255, 255, 255]);
+				s2t['throws'](
+					function () { method(target, 'MjYyZm.9v'); },
+					SyntaxError,
+					'illegal character in second chunk'
+				);
+				s2t.deepEqual(
+					target,
+					new Uint8Array([50, 54, 50, 255, 255]),
+					'decoding from MjYyZm.9v should only write the valid chunks'
+				);
+
+				var target2 = new Uint8Array([255, 255, 255, 255, 255]);
+				s2t['throws'](
+					function () { method(target2, 'MjYyZg', { lastChunkHandling: 'strict' }); },
+					SyntaxError,
+					'padding omitted with lastChunkHandling: strict'
+				);
+				s2t.deepEqual(
+					target2,
+					new Uint8Array([50, 54, 50, 255, 255]),
+					'decoding from MjYyZg should only write the valid chunks'
+				);
+
+				var target3 = new Uint8Array([255, 255, 255, 255, 255]);
+				s2t['throws'](
+					function () { method(target3, 'MjYyZg==='); },
+					SyntaxError,
+					'extra characters after padding'
+				);
+				s2t.deepEqual(
+					target3,
+					new Uint8Array([50, 54, 50, 255, 255]),
+					'decoding from MjYyZg=== should not write the last chunk because it has extra padding'
+				);
+
+				s2t.end();
+			});
+
 			var illegal = [
 				'Zm.9v',
 				'Zm9v^',

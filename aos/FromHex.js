@@ -31,26 +31,38 @@ module.exports = function FromHex(string) {
 
 	var length = string.length; // step 2
 
-	if (modulo(length, 2) !== 0) {
-		throw new $SyntaxError('string should be an even number of characters'); // step 3
+	var bytes = []; // step 3
+
+	var read = 0; // step 4
+
+	if (modulo(length, 2) !== 0) { // step 5
+		return {
+			'[[Read]]': read,
+			'[[Bytes]]': bytes,
+			'[[Error]]': new $SyntaxError('string should be an even number of characters')
+		};
 	}
 
-	var bytes = []; // step 4
+	while (read < length && bytes.length < maxLength) { // step 6
+		var hexits = substring(string, read, read + 2); // step 6.a
 
-	var index = 0; // step 5
-
-	while (index < length && bytes.length < maxLength) { // step 6
-		var hexits = substring(string, index, index + 2); // step 6.a
-
-		if (!isHexDigit(hexits)) {
-			throw new $SyntaxError('string should only contain hex characters'); // step 6.b
+		if (!isHexDigit(hexits)) { // step 6.b
+			return {
+				'[[Read]]': read,
+				'[[Bytes]]': bytes,
+				'[[Error]]': new $SyntaxError('string should only contain hex characters')
+			};
 		}
 
-		index += 2; // step 6.c
+		read += 2; // step 6.c
 
 		var byte = $parseInt(hexits, 16); // step 6.d
 
 		$push(bytes, byte); // step 6.e
 	}
-	return { '[[Read]]': index, '[[Bytes]]': bytes }; // step 7
+	return {
+		'[[Read]]': read,
+		'[[Bytes]]': bytes,
+		'[[Error]]': null
+	}; // step 7
 };

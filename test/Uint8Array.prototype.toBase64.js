@@ -225,6 +225,25 @@ module.exports = {
 				s2t.end();
 			});
 
+			st.test('test262: test/built-ins/Uint8Array/prototype/toBase64/omit-padding', function (s2t) {
+				s2t.equal(method(new Uint8Array([199, 239])), 'x+8=');
+				s2t.equal(method(new Uint8Array([199, 239]), { omitPadding: false }), 'x+8=');
+				s2t.equal(method(new Uint8Array([199, 239]), { omitPadding: true }), 'x+8');
+				s2t.equal(method(new Uint8Array([255]), { omitPadding: true }), '/w');
+
+				// works with base64url alphabet
+				s2t.equal(method(new Uint8Array([199, 239]), { alphabet: 'base64url' }), 'x-8=');
+				s2t.equal(method(new Uint8Array([199, 239]), { alphabet: 'base64url', omitPadding: false }), 'x-8=');
+				s2t.equal(method(new Uint8Array([199, 239]), { alphabet: 'base64url', omitPadding: true }), 'x-8');
+				s2t.equal(method(new Uint8Array([255]), { alphabet: 'base64url', omitPadding: true }), '_w');
+
+				// performs ToBoolean on the argument
+				s2t.equal(method(new Uint8Array([255]), { omitPadding: 0 }), '/w==');
+				s2t.equal(method(new Uint8Array([255]), { omitPadding: 1 }), '/w');
+
+				s2t.end();
+			});
+
 			// standard test vectors from https://datatracker.ietf.org/doc/html/rfc4648#section-10
 			st.equal(method(new Uint8Array([])), '');
 			st.equal(method(new Uint8Array([102])), 'Zg==');

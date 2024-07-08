@@ -64,21 +64,21 @@ module.exports = function setFromBase64(string) {
 
 	var result = FromBase64(string, alphabet, lastChunkHandling, byteLength); // step 14
 
-	if (result['[[Error]]']) { // step 15
-		throw result['[[Error]]']; // step 15.a
-	}
+	var bytes = result['[[Bytes]]']; // step 15
 
-	var bytes = result['[[Bytes]]']; // step 16
+	var written = bytes.length; // step 16
 
-	var written = bytes.length; // step 17
-
-	// 18. NOTE: FromBase64 does not invoke any user code, so the ArrayBuffer backing into cannot have been detached or shrunk.
+	// 17. NOTE: FromBase64 does not invoke any user code, so the ArrayBuffer backing into cannot have been detached or shrunk.
 
 	if (written > byteLength) {
 		throw new $TypeError('Assertion failed: written is not <= byteLength'); // step 19
 	}
 
-	SetUint8ArrayBytes(into, bytes); // step 20
+	SetUint8ArrayBytes(into, bytes); // step 19
+
+	if (result['[[Error]]']) { // step 20
+		throw result['[[Error]]']; // step 20.a
+	}
 
 	var offset = typedArrayByteOffset(into); // step 21
 
