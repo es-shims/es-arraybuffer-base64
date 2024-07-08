@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.1](https://github.com/es-shims/es-arraybuffer-base64/compare/v1.1.0...v1.1.1) - 2024-07-08
+
+### Commits
+
+- [Fix] write until an error [`eb8d6c4`](https://github.com/es-shims/es-arraybuffer-base64/commit/eb8d6c4e59d1badd3319b14aec3bfffb5a51edf1)
+- [Dev Deps] update `is-core-module`, `object-inspect`, `tape` [`7810f65`](https://github.com/es-shims/es-arraybuffer-base64/commit/7810f659ce7a1ad285b12d79a14c3905ad3f319d)
+
 ## [v1.1.0](https://github.com/es-shims/es-arraybuffer-base64/compare/v1.0.3...v1.1.0) - 2024-06-12
 
 ### Commits
