@@ -1,10 +1,8 @@
 'use strict';
 
 var $TypeError = require('es-errors/type');
-
-var isInteger = require('es-abstract/helpers/isInteger');
-
-var callBound = require('call-bind/callBound');
+var isInteger = require('math-intrinsics/isInteger');
+var callBound = require('call-bound');
 
 var $charCodeAt = callBound('String.prototype.charCodeAt');
 

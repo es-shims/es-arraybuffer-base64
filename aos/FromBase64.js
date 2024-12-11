@@ -3,14 +3,14 @@
 var $SyntaxError = require('es-errors/syntax');
 var $TypeError = require('es-errors/type');
 
-var callBound = require('call-bind/callBound');
+var callBound = require('call-bound');
 
 var DecodeBase64Chunk = require('../aos/DecodeBase64Chunk');
 var SkipAsciiWhitespace = require('../aos/SkipAsciiWhitespace');
 var substring = require('es-abstract/2024/substring');
 
-var isInteger = require('es-abstract/helpers/isInteger');
-var maxSafeInteger = require('es-abstract/helpers/maxSafeInteger');
+var isInteger = require('math-intrinsics/isInteger');
+var maxSafeInteger = require('math-intrinsics/constants/maxSafeInteger');
 
 var alphabetFromIdentifier = require('./helpers/alphabetFromIdentifier');
 

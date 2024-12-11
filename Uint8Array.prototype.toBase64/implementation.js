@@ -10,7 +10,7 @@ var ToBoolean = require('es-abstract/2024/ToBoolean');
 
 var alphabetFromIdentifier = require('../aos/helpers/alphabetFromIdentifier');
 
-var callBound = require('es-abstract/helpers/callBound');
+var callBound = require('call-bound');
 
 var $charAt = callBound('String.prototype.charAt');
 

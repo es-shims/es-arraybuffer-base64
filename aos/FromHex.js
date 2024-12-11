@@ -9,10 +9,10 @@ var $TypeError = require('es-errors/type');
 var modulo = require('es-abstract/2024/modulo');
 var substring = require('es-abstract/2024/substring');
 
-var isInteger = require('es-abstract/helpers/isInteger');
-var MAX_SAFE_INTEGER = require('es-abstract/helpers/maxSafeInteger');
+var isInteger = require('math-intrinsics/isInteger');
+var MAX_SAFE_INTEGER = require('math-intrinsics/constants/maxSafeInteger');
 
-var callBound = require('call-bind/callBound');
+var callBound = require('call-bound');
 var safeRegexTest = require('safe-regex-test');
 
 var isHexDigit = safeRegexTest(/^[0-9a-fA-F]+$/);
