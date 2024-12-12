@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.2](https://github.com/es-shims/es-arraybuffer-base64/compare/v1.1.1...v1.1.2) - 2024-12-11
+
+### Commits
+
+- [actions] split out node 10-20, and 20+ [`6a88895`](https://github.com/es-shims/es-arraybuffer-base64/commit/6a88895d988a5ecfdce41a0543f7da482d317b39)
+- [Refactor] use `call-bound` and `math-intrinsics` directly [`891fc01`](https://github.com/es-shims/es-arraybuffer-base64/commit/891fc01bb068e397a88fb2c506eda4de9e264431)
+- [Deps] update `call-bind`, `es-abstract`, `get-intrinsic`, `typed-array-byte-offset`, `typed-array-length`, `which-typed-array` [`0251e2f`](https://github.com/es-shims/es-arraybuffer-base64/commit/0251e2f38c5233f765bbc195f4166265bd83aaca)
+- [Dev Deps] update `auto-changelog`, `is-core-module`, `object-inspect`, `tape` [`dbfd9dd`](https://github.com/es-shims/es-arraybuffer-base64/commit/dbfd9dd56792e82a8112c66f95f69571566fb4ba)
+- [Tests] replace `aud` with `npm audit` [`60d7698`](https://github.com/es-shims/es-arraybuffer-base64/commit/60d7698840fff66c85d6dfea2fa2a7785e0b2874)
+- [Dev Deps] add missing peer dep [`1c07138`](https://github.com/es-shims/es-arraybuffer-base64/commit/1c07138afdc5327fbe4234d6e631114e15160df8)
+
 ## [v1.1.1](https://github.com/es-shims/es-arraybuffer-base64/compare/v1.1.0...v1.1.1) - 2024-07-08
 
 ### Commits
