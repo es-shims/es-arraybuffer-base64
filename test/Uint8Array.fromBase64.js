@@ -2,7 +2,7 @@
 
 var defineProperties = require('define-properties');
 var forEach = require('es-abstract/helpers/forEach');
-var getProto = require('es-abstract/helpers/getProto');
+var getProto = require('get-proto');
 var inspect = require('object-inspect');
 var test = require('tape');
 

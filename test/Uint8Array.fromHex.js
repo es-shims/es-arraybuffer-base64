@@ -3,7 +3,7 @@
 var defineProperties = require('define-properties');
 var test = require('tape');
 var forEach = require('es-abstract/helpers/forEach');
-var getProto = require('es-abstract/helpers/getProto');
+var getProto = require('get-proto');
 
 var index = require('../Uint8Array.fromHex');
 var impl = require('../Uint8Array.fromHex/implementation');

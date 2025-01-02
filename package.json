@@ -78,6 +78,7 @@
 		"encoding": "^0.1.13",
 		"eslint": "=8.8.0",
 		"evalmd": "^0.0.19",
+		"get-proto": "^1.0.1",
 		"glob": "=10.3.7",
 		"in-publish": "^2.0.1",
 		"is-core-module": "^2.16.1",
