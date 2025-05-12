@@ -201,6 +201,26 @@ module.exports = {
 				s2t.end();
 			});
 
+			st.test('test262: test/built-ins/Uint8Array/prototype/setFromHex/throws-when-string-length-is-odd', function (s2t) {
+				var zeroLength = new Uint8Array(0);
+
+				s2t['throws'](
+					function () { method(zeroLength, '1'); },
+					SyntaxError,
+					'Uint8Array has length 0'
+				);
+
+				var nonZeroLength = new Uint8Array(1);
+
+				s2t['throws'](
+					function () { method(nonZeroLength, '1'); },
+					SyntaxError,
+					'Uint8Array has length >0'
+				);
+
+				s2t.end();
+			});
+
 			st.end();
 		});
 	},
