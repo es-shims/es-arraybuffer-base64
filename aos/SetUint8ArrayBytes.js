@@ -1,6 +1,6 @@
 'use strict';
 
-var SetValueInBuffer = require('es-abstract/2024/SetValueInBuffer');
+var SetValueInBuffer = require('es-abstract/2025/SetValueInBuffer');
 var ValidateUint8Array = require('./ValidateUint8Array');
 
 var typedArrayBuffer = require('typed-array-buffer');

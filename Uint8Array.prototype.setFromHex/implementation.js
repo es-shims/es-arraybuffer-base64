@@ -7,9 +7,9 @@ var $TypeError = require('es-errors/type');
 var $Uint8Array = GetIntrinsic('%Uint8Array%', true);
 
 var FromHex = require('../aos/FromHex');
-var IsTypedArrayOutOfBounds = require('es-abstract/2024/IsTypedArrayOutOfBounds');
-var MakeTypedArrayWithBufferWitnessRecord = require('es-abstract/2024/MakeTypedArrayWithBufferWitnessRecord');
-var TypedArrayLength = require('es-abstract/2024/TypedArrayLength');
+var IsTypedArrayOutOfBounds = require('es-abstract/2025/IsTypedArrayOutOfBounds');
+var MakeTypedArrayWithBufferWitnessRecord = require('es-abstract/2025/MakeTypedArrayWithBufferWitnessRecord');
+var TypedArrayLength = require('es-abstract/2025/TypedArrayLength');
 var ValidateUint8Array = require('../aos/ValidateUint8Array');
 var SetUint8ArrayBytes = require('../aos/SetUint8ArrayBytes');
 

@@ -4,10 +4,10 @@ var $TypeError = require('es-errors/type');
 
 var callBound = require('call-bound');
 
-var GetValueFromBuffer = require('es-abstract/2024/GetValueFromBuffer');
-var IsTypedArrayOutOfBounds = require('./IsTypedArrayOutOfBounds');
-var MakeTypedArrayWithBufferWitnessRecord = require('./MakeTypedArrayWithBufferWitnessRecord');
-var TypedArrayLength = require('./TypedArrayLength');
+var GetValueFromBuffer = require('es-abstract/2025/GetValueFromBuffer');
+var IsTypedArrayOutOfBounds = require('es-abstract/2025/IsTypedArrayOutOfBounds');
+var MakeTypedArrayWithBufferWitnessRecord = require('es-abstract/2025/MakeTypedArrayWithBufferWitnessRecord');
+var TypedArrayLength = require('es-abstract/2025/TypedArrayLength');
 
 var typedArrayBuffer = require('typed-array-buffer');
 var whichTypedArray = require('which-typed-array');

@@ -7,7 +7,7 @@ var callBound = require('call-bound');
 
 var DecodeBase64Chunk = require('../aos/DecodeBase64Chunk');
 var SkipAsciiWhitespace = require('../aos/SkipAsciiWhitespace');
-var substring = require('es-abstract/2024/substring');
+var substring = require('es-abstract/2025/substring');
 
 var isInteger = require('math-intrinsics/isInteger');
 var maxSafeInteger = require('math-intrinsics/constants/maxSafeInteger');

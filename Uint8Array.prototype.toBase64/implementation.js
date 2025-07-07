@@ -2,11 +2,11 @@
 
 var $TypeError = require('es-errors/type');
 
-var Get = require('es-abstract/2024/Get');
+var Get = require('es-abstract/2025/Get');
 var GetOptionsObject = require('../aos/GetOptionsObject');
 var GetUint8ArrayBytes = require('../aos/GetUint8ArrayBytes');
 var ValidateUint8Array = require('../aos/ValidateUint8Array');
-var ToBoolean = require('es-abstract/2024/ToBoolean');
+var ToBoolean = require('es-abstract/2025/ToBoolean');
 
 var alphabetFromIdentifier = require('../aos/helpers/alphabetFromIdentifier');
 

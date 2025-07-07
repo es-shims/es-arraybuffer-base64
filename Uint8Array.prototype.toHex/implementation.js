@@ -1,8 +1,8 @@
 'use strict';
 
 var GetUint8ArrayBytes = require('../aos/GetUint8ArrayBytes');
-var NumberToString = require('es-abstract/2024/Number/toString');
-var StringPad = require('es-abstract/2024/StringPad');
+var NumberToString = require('es-abstract/2025/Number/toString');
+var StringPad = require('es-abstract/2025/StringPad');
 var ValidateUint8Array = require('../aos/ValidateUint8Array');
 
 var forEach = require('es-abstract/helpers/forEach');

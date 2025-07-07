@@ -7,13 +7,13 @@ var $TypeError = require('es-errors/type');
 var $Uint8Array = GetIntrinsic('%Uint8Array%', true);
 
 var FromBase64 = require('../aos/FromBase64');
-var Get = require('es-abstract/2024/Get');
+var Get = require('es-abstract/2025/Get');
 var GetOptionsObject = require('../aos/GetOptionsObject');
-var IsTypedArrayOutOfBounds = require('es-abstract/2024/IsTypedArrayOutOfBounds');
-var MakeTypedArrayWithBufferWitnessRecord = require('es-abstract/2024/MakeTypedArrayWithBufferWitnessRecord');
+var IsTypedArrayOutOfBounds = require('es-abstract/2025/IsTypedArrayOutOfBounds');
+var MakeTypedArrayWithBufferWitnessRecord = require('es-abstract/2025/MakeTypedArrayWithBufferWitnessRecord');
 var SetUint8ArrayBytes = require('../aos/SetUint8ArrayBytes');
-var SetValueInBuffer = require('es-abstract/2024/SetValueInBuffer');
-var TypedArrayLength = require('es-abstract/2024/TypedArrayLength');
+var SetValueInBuffer = require('es-abstract/2025/SetValueInBuffer');
+var TypedArrayLength = require('es-abstract/2025/TypedArrayLength');
 var ValidateUint8Array = require('../aos/ValidateUint8Array');
 
 var typedArrayByteOffset = require('typed-array-byte-offset');
