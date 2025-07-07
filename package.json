@@ -124,5 +124,8 @@
 		"ignore": [
 			".github/workflows"
 		]
+	},
+	"testling": {
+		"files": "test/shimmed.js"
 	}
 }

@@ -3,5 +3,12 @@
 var implementation = require('./implementation');
 
 module.exports = function getPolyfill() {
-	return typeof Uint8Array === 'function' && typeof Uint8Array.prototype.setFromBase64 === 'function' ? Uint8Array.prototype.setFromBase64 : implementation;
+	if (typeof Uint8Array === 'function' && typeof Uint8Array.setFromBase64 === 'function') {
+		try {
+			Uint8Array.setFromBase64('a');
+		} catch (e) {
+			return Uint8Array.setFromBase64;
+		}
+	}
+	return implementation;
 };

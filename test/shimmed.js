@@ -3,21 +3,28 @@
 require('../auto');
 
 var test = require('tape');
-var forEach = require('es-abstract/helpers/forEach');
 
 var shims = require('../');
 
-forEach(shims, function (shim) {
-	var shimTests;
-	try {
-		shimTests = require('./' + shim); // eslint-disable-line global-require
-	} catch (e) {
-		test(shim + ': shimmed', { todo: true });
-	}
-	if (shimTests) {
-		shimTests.shimmed();
-	}
+test('shim list', function (t) {
+	t.deepEqual(shims, [
+		'Uint8Array.fromBase64',
+		'Uint8Array.fromHex',
+		'Uint8Array.prototype.setFromBase64',
+		'Uint8Array.prototype.setFromHex',
+		'Uint8Array.prototype.toBase64',
+		'Uint8Array.prototype.toHex'
+	], 'shim list is as expected');
+
+	t.end();
 });
+
+require('./Uint8Array.fromBase64').shimmed();
+require('./Uint8Array.fromHex').shimmed();
+require('./Uint8Array.prototype.setFromBase64').shimmed();
+require('./Uint8Array.prototype.setFromHex').shimmed();
+require('./Uint8Array.prototype.toBase64').shimmed();
+require('./Uint8Array.prototype.toHex').shimmed();
 
 test('integration', { skip: typeof Uint8Array !== 'function' }, function (t) {
 	var array = new Uint8Array([72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100]);

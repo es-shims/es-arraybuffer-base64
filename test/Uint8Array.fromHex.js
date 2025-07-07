@@ -16,7 +16,7 @@ var shimName = 'Uint8Array.fromHex';
 
 module.exports = {
 	tests: function (t, method) {
-		t.test('Uint8Arrays not supported', { skip: typeof Uint8Array === 'function' }, function (st) {
+		t.test('when Uint8Arrays not supported', { skip: typeof Uint8Array === 'function' }, function (st) {
 			st['throws'](
 				function () { return method(''); },
 				SyntaxError,
