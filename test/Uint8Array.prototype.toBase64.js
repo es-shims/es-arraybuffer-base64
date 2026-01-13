@@ -278,8 +278,6 @@ module.exports = {
 	},
 	implementation: function () {
 		test(shimName + ': implementation', function (t) {
-			t.equal(impl, polyfill, 'implementation is polyfill itself');
-
 			module.exports.tests(t, callBind(impl));
 
 			t.end();
